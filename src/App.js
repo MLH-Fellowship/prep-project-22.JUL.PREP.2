@@ -9,15 +9,6 @@ function App() {
   const [city, setCity] = useState("New York City")
   const [results, setResults] = useState(null);
 
-  const [hourlyTemps, setHourlyTemps] = useState([
-    {id: 1, min: 21, max: 32, desc: "cloudy"},
-    {id: 2, min: 20, max: 34, desc: "cloudy"},
-    {id: 3, min: 19, max: 30, desc: "cloudy"},
-    {id: 4, min: 21, max: 32, desc: "cloudy"},
-    {id: 5, min: 21, max: 32, desc: "cloudy"},
-    {id: 6, min: 21, max: 32, desc: "cloudy"},
-    {id: 7, min: 21, max: 32, desc: "cloudy"},
-  ]);
 
   useEffect(() => {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
@@ -31,6 +22,16 @@ function App() {
             setResults(result);
           }
         },
+              minimum: fc.main.temp_min,
+              maximum: fc.main.temp_max, 
+            }
+          })
+        })
+        console.log(hourlyForecast)
+        setIsLoaded(true);
+        setResults(hourlyForecast)
+        //}
+      }, 
         (error) => {
           setIsLoaded(true);
           setError(error);
@@ -58,7 +59,13 @@ function App() {
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
         </div> */}
-        <Forecast hourlyForecast={hourlyTemps}/>
+        {
+          <div className="Results">
+            {isLoaded && results && <>
+              <Forecast hourlyForecast={results}/>
+            </>}
+          </div>
+        }
       </div>
     </>
   }
