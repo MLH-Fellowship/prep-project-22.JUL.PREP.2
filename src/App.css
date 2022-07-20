@@ -30,3 +30,45 @@ input {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+@media (max-width:2689px) and (min-width:1440px)
+{
+  .Results {
+    margin-left: 450px;
+    margin-right: 450px;
+  }
+}
+@media (max-width:1439px) and (min-width:1024px)
+{
+  .Results {
+    margin-left: 350px;
+    margin-right: 350px;
+  }
+}
+@media (max-width:1023px) and (min-width:738px)
+{
+  .Results {
+    margin-left: 200px;
+    margin-right: 200px;
+  }
+}
+@media (max-width:737px) and (min-width:425px)
+{
+  .Results {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+@media (max-width:424px) and (min-width:375px)
+{
+  .Results {
+    margin-left: 90px;
+    margin-right: 90px;
+  }
+}
+@media (max-width:374px) and (min-width:0px)
+{
+  .Results {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+}
