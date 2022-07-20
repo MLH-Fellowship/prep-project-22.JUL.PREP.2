@@ -9,32 +9,34 @@ function Forecast({hourlyForecast}) {
     let currentForecast = hourlyForecast[0];
     return (
         <>
-        <div className='weather-card'>
-            <div className='weather-upperrow'>
-                <div className='weather-icon'>
-                    <img src={"http://openweathermap.org/img/wn/"+currentForecast.icon+"@2x.png"} alt='cloudy_img'/>
+        <div className='weather-container'>
+            <div className='weather-card'>
+                <div className='weather-upperrow'>
+                    <div className='weather-icon'>
+                        <img src={"http://openweathermap.org/img/wn/"+currentForecast.icon+"@2x.png"} alt='cloudy_img'/>
+                    </div>
+                    <p>{Math.round(currentForecast.current_temp)}&#8451;</p>
                 </div>
-                <p>{Math.round(currentForecast.current_temp)}&#8451;</p>
+                <div className='weather-lowerrow'>
+                    <div id='humidity'>
+                        <img src={humidity_logo} alt='humidity_icon'/>
+                        <p>{currentForecast.humidity}%</p>
+                    </div>
+                    <div id='windspeed'>
+                        <img src={windspeed_logo} alt='windspeed_icon'/>
+                        <p>{currentForecast.windspeed}kmph</p>
+                    </div>
+                    <div id='precipitation'>
+                        <p className='realfeel'>R.F</p>
+                        <p>{Math.round(currentForecast.feels_like)}&#8451;</p>
+                    </div>
+                </div>
             </div>
-            <div className='weather-lowerrow'>
-                <div id='humidity'>
-                    <img src={humidity_logo} alt='humidity_icon'/>
-                    <p>{currentForecast.humidity}%</p>
-                </div>
-                <div id='windspeed'>
-                    <img src={windspeed_logo} alt='windspeed_icon'/>
-                    <p>{currentForecast.windspeed}kmph</p>
-                </div>
-                <div id='precipitation'>
-                    <p className='realfeel'>R.F</p>
-                    <p>{Math.round(currentForecast.feels_like)}&#8451;</p>
-                </div>
+            <div className='hourly-forecast-container'>
+                {hourlyForecast.map((el, index) => (
+                    <HourlyForecast key={index} forecast={el} />
+                ))}
             </div>
-        </div>
-        <div className='hourly-forecast-container'>
-            {hourlyForecast.map(el => (
-                <HourlyForecast forecast={el} />
-            ))}
         </div>
         </>
     )

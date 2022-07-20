@@ -3,20 +3,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 8px;
-    background-color: rgb(162, 211, 234);
+    margin: 0.2rem;
     color: black;
-    /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
-    box-shadow: 2px 2px 3px 0px rgba(0,0,0,1);
 }
 
-.hour {
-    /* display: flex;
-    justify-content: center; */
+.hour, .day {
     font-weight: 600;
     letter-spacing: 0.15em;
     padding: 0.2rem;
+    color: rgb(53, 53, 53);
     background-color: rgb(255, 191, 0);
+    border: 0;
+}
+
+.day {
+    margin-bottom: 0.5rem;
 }
