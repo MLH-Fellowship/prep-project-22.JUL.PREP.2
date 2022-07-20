@@ -7,12 +7,10 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState(null);
   const [results, setResults] = useState(null);
-  const [coord, setcoord] = useState(null);
+  
 
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition((position) => {
-      
-
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
       )
@@ -21,10 +19,6 @@ function App() {
         setIsLoaded(true);
         setCity(`${result.name}, ${result.sys.country}`);
         setResults(results);
-        setcoord({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
       })
       .catch((err)=>{
         setIsLoaded(false);
@@ -33,9 +27,7 @@ function App() {
 
     },
     
-    ()=>{
-      setCity('');
-    }  
+     
     
     )
   },[])
