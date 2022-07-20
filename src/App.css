@@ -31,7 +31,6 @@ input {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-<<<<<<< HEAD
 .app{
   background-image: url(./assets/backgrounds/clear.jpg);
   background-size: cover ;
@@ -66,7 +65,7 @@ input {
 main{
   min-height: 100vh;
   background-image: linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.75));
-=======
+}
 @media (max-width:2689px) and (min-width:1440px)
 {
   .Results {
@@ -108,5 +107,4 @@ main{
     margin-left: 60px;
     margin-right: 60px;
   }
->>>>>>> 1aaa83cb1b4c2aee488b0d6b24a1e7c043d29bad
 }
