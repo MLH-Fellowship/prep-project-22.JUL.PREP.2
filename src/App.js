@@ -5,8 +5,41 @@ import logo from './mlh-prep.png'
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [city, setCity] = useState("New York City")
+  const [city, setCity] = useState(null);
   const [results, setResults] = useState(null);
+  const [coord, setcoord] = useState(null);
+
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition((position) => {
+      
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
+      )
+      .then(res=> res.json())
+      .then((result)=>{
+        setIsLoaded(true);
+        setCity(`${result.name}, ${result.sys.country}`);
+        setResults(results);
+        setcoord({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      })
+      .catch((err)=>{
+        setIsLoaded(false);
+        setError(err);
+      });
+
+    },
+    
+    ()=>{
+      setCity('');
+    }  
+    
+    )
+  },[])
+
 
   useEffect(() => {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
