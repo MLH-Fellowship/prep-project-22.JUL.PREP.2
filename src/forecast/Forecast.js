@@ -2,33 +2,32 @@ import React from 'react'
 import "./Forecast.css"
 import HourlyForecast from "./HourlyForecast.js";
 import humidity_logo from "../assets/humidity.png";
-import precipitation_logo from "../assets/precipitation.png";
 import windspeed_logo from "../assets/windspeed.png";
-import cloudy_img from "../assets/cloudy.png";
 
 
 function Forecast({hourlyForecast}) {
+    let currentForecast = hourlyForecast[0];
     return (
         <>
         <div className='weather-card'>
             <div className='weather-upperrow'>
                 <div className='weather-icon'>
-                    <img src={cloudy_img} alt='cloudy_img'/>
+                    <img src={"http://openweathermap.org/img/wn/"+currentForecast.icon+"@2x.png"} alt='cloudy_img'/>
                 </div>
-                <p>29&#8451;</p>
+                <p>{Math.round(currentForecast.current_temp)}&#8451;</p>
             </div>
             <div className='weather-lowerrow'>
                 <div id='humidity'>
                     <img src={humidity_logo} alt='humidity_icon'/>
-                    <p>90%</p>
+                    <p>{currentForecast.humidity}%</p>
                 </div>
                 <div id='windspeed'>
                     <img src={windspeed_logo} alt='windspeed_icon'/>
-                    <p>13kmph</p>
+                    <p>{currentForecast.windspeed}kmph</p>
                 </div>
                 <div id='precipitation'>
-                    <img src={precipitation_logo} alt='precipitation_icon'/>
-                    <p>63%</p>
+                    <p className='realfeel'>R.F</p>
+                    <p>{Math.round(currentForecast.feels_like)}&#8451;</p>
                 </div>
             </div>
         </div>

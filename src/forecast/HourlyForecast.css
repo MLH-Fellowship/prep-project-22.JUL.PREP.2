@@ -4,6 +4,19 @@
     justify-content: center;
     align-items: center;
     margin: 0.5rem;
-    border: 1px solid bisque;
     padding: 0.5rem;
+    border-radius: 8px;
+    background-color: rgb(162, 211, 234);
+    color: black;
+    /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+    box-shadow: 2px 2px 3px 0px rgba(0,0,0,1);
+}
+
+.hour {
+    /* display: flex;
+    justify-content: center; */
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    padding: 0.2rem;
+    background-color: rgb(255, 191, 0);
 }

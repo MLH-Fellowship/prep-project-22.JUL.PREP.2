@@ -31,17 +31,21 @@ function App() {
         //   setIsLoaded(false)
         // }
         // else{
-        console.log(result.list)
+        // console.log(result.list)
         let hourlyForecast = []
         result.list.forEach((fc) => {
           hourlyForecast.push({
+            current_temp: fc.main.temp, 
             condition: fc.weather[0].description, 
             date: new Date(fc.dt * 1000),
             feels_like: fc.main.feels_like,
             temperature: {
               minimum: fc.main.temp_min,
               maximum: fc.main.temp_max, 
-            }
+            },
+            icon: fc.weather[0].icon,
+            windspeed: fc.wind.speed,
+            humidity: fc.main.humidity
           })
         })
         console.log(hourlyForecast)
@@ -67,22 +71,11 @@ function App() {
           type="text"
           value={city}
           onChange={event => setCity(event.target.value)} />
-        {/* <div className="Results">
-          {!isLoaded && <h2>Loading...</h2>}
-          {console.log(results)}
-          {isLoaded && results && <>
-            <h3>{results.weather[0].main}</h3>
-            <p>Feels like {results.main.feels_like}°C</p>
-            <i><p>{results.name}, {results.sys.country}</p></i>
-          </>}
-        </div> */}
-        {
           <div className="Results">
             {isLoaded && results && <>
               <Forecast hourlyForecast={results}/>
             </>}
           </div>
-        }
       </div>
     </>
   }

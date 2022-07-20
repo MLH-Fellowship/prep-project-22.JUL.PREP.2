@@ -1,13 +1,13 @@
 import React from 'react';
 import "./HourlyForecast.css";
-import cloudy_icon from "../assets/cloudy.png";
 
 function HourlyForecast({forecast}) {
     return (
         <>
         <div className='hourly-container'>
-            <img src={cloudy_icon} alt="cloudy-icon"/>
-            <p>{forecast.temperature.maximum}&#8451;/{forecast.temperature.minimum}&#8451;</p>
+            <div className='hour'>{forecast.date.getHours()}:{forecast.date.getMinutes()}</div>
+            <img src={"http://openweathermap.org/img/wn/"+forecast.icon+"@2x.png"} alt="cloudy-icon"/>
+            <p>{Math.round(forecast.temperature.maximum)}&#8451;/{Math.round(forecast.temperature.minimum)}&#8451;</p>
         </div>
         </>
     )
