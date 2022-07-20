@@ -23,15 +23,13 @@ function App() {
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
       .then(res => res.json())
       .then((result) => {
-        console.log(result)
-        setIsLoaded(true);
-        // if(result['cod'] !== 200){
-        //   console.log(result['cod']);
-        //   console.log("hello shit")
-        //   setIsLoaded(false)
-        // }
-        // else{
-        // console.log(result.list)
+        //console.log(result)
+        if(result.cod !== '200'){
+          setIsLoaded(true)
+          //setError(result)
+        }
+        else{
+        //console.log(result.list)
         let hourlyForecast = []
         result.list.forEach((fc) => {
           hourlyForecast.push({
@@ -50,15 +48,16 @@ function App() {
         })
         console.log(hourlyForecast)
         setIsLoaded(true);
+        setError();
         setResults(hourlyForecast)
-        //}
+        }
       }, 
         (error) => {
           setIsLoaded(true);
           setError(error);
         }
       )
-  }, [city])
+  }, [city], [])
 
   if (error) {
     return <div>Error: {error.message}</div>;
