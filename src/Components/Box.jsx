@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import '../assets/css/Box.css';
 import requiredThings from "../helper/requiredThings";
 
@@ -15,13 +15,6 @@ function Item(props) {
 
 
 function Box(props){
-	useEffect(() => {
-	  
-	console.log(props.weather);
-	console.log(requiredThings[props.weather])
-	  
-	})
-	
 	return (
 		<div className="flex required-things-box">
 			{Object.keys(requiredThings[props.weather]).map(item=>{
