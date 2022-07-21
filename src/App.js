@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import './App.css';
+import Box from "./Components/Box";
 import logo from './mlh-prep.png'
 
 function App() {
@@ -52,7 +53,9 @@ function App() {
           </>}
         </div>
       </div>
+      <Box/>
       </main>
+      
     </div>
   }
 }

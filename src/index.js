@@ -7,7 +7,6 @@ import Box from './Components/Box';
 ReactDOM.render(
   <React.StrictMode>
     <App />
-		<Box />
   </React.StrictMode>,
   document.getElementById('root')
 );
