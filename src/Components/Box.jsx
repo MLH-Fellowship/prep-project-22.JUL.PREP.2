@@ -5,7 +5,7 @@ import requiredThings from "../helper/requiredThings";
 
 function Item(props) {
 	return (
-		<div className="required-thing">
+		<div className="flex required-thing">
 			<img src={props.img} alt={props.alt} width="50" height="50"></img>
 			<p>{props.name}</p>
 		</div>
@@ -31,29 +31,6 @@ function Box(props){
 	)
 }
 
-
-
-
-
-// class Box extends React.Component {
-
-// 	renderItem(img, description) {
-// 		return <Item img={img} alt={description}/>
-// 	}
-
-//   render() {
-// 		return (
-// 			<div className="comp">
-// 				{
-// 					React.Children.toArray(
-// 						Object.keys(requiredThings["Thunderstorm"]).map((item) => 
-// 							this.renderItem(requiredThings["Thunderstorm"][item], item)
-// 						))
-// 			  }
-// 			</div>
-// 		);
-// 	}
-// }
 
 export default Box;
 
