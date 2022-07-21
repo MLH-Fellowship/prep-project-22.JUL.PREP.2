@@ -1,0 +1,11 @@
+
+.comp {
+	margin: 30px 20px;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.flex-comp {
+	margin: 10px;
+}
+
