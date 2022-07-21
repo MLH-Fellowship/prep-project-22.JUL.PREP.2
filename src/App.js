@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import './App.css';
 import Forecast from "./forecast/Forecast.js";
+import Box from "./Components/Box";
 import logo from './mlh-prep.png'
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City")
   const [results, setResults] = useState(null);
-
+  const [generic, setGeneric]=useState("app");
   useEffect(() => {
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
       .then(res => res.json())
@@ -36,6 +37,7 @@ function App() {
         setIsLoaded(true);
         setError();
         setResults(hourlyForecast)
+        setGeneric("app "+result.weather[0].main);
         }
       }, 
         (error) => {
@@ -48,7 +50,8 @@ function App() {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
-    return <>
+    return <div className={[generic]}>
+      <main>
       <img className="logo" src={logo} alt="MLH Prep Logo"></img>
       <div>
         <h2>Enter a city below 👇</h2>
@@ -62,7 +65,11 @@ function App() {
             </>}
           </div>
       </div>
-    </>
+      <p className="required-things-heading">Things you should carry 🎒</p>
+      {isLoaded && results && <Box weather={results.weather[0].main}/>}
+      </main>
+      
+    </div>
   }
 }
 
