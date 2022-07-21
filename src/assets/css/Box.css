@@ -30,3 +30,22 @@
   font-weight: bold;
 }
 
+@media (max-width: 738px){
+	.required-things-box{
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.required-thing{
+		margin: 30px auto;
+	}
+
+	.required-thing:last-child{
+		margin-bottom: 100px;
+	}
+
+	.required-thing:hover{
+		transform: scale(1.2)
+	}
+}
+
