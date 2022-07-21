@@ -4,7 +4,7 @@ body {
   color: white;
   text-align: center;
   height: 100vh;
-  background-image: url(./assets/backgrounds/clear.jpg);
+  background-image: url(../assets/backgrounds/clear.jpg);
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -38,23 +38,23 @@ input {
 }
 
 .Rain {
-  background-image: url(./assets/backgrounds/rainy.jpg);
+  background-image: url(../assets/backgrounds/rainy.jpg);
 }
 
 .Clouds {
-  background-image: url(./assets/backgrounds/cloudy.jpg);
+  background-image: url(../assets/backgrounds/cloudy.jpg);
 }
 
 .Thunder {
-  background-image: url(./assets/backgrounds/thunder.jpg);
+  background-image: url(../assets/backgrounds/thunder.jpg);
 }
 
 .Snow {
-  background-image: url(./assets/backgrounds/snow.jpg);
+  background-image: url(../assets/backgrounds/snow.jpg);
 }
 
 .Mist {
-  background-image: url(./assets/backgrounds/mist.jpg);
+  background-image: url(../assets/backgrounds/mist.jpg);
 }
 
 @media (max-width: 2689px) and (min-width: 1440px) {
@@ -92,34 +92,4 @@ input {
     margin-left: 60px;
     margin-right: 60px;
   }
-}
-
-button.fab {
-  outline: none;
-  border: none;
-  color: white;
-  height: 48px;
-  padding: 10px 20px;
-  border-radius: 48px;
-  box-shadow: rgba(50, 50, 93, 0.35) 0px 0px 20px 0px;
-  background-color: #133667;
-  display: flex;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  transition: 0.2s;
-}
-button.fab:hover {
-  background-color: #375174;
-}
-
-button.fab.bottom-right {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-}
-
-.fab-text {
-  font-weight: bold;
-  margin-left: 4px;
 }

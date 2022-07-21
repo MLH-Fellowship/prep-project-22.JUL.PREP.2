@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import logo from "./logo.png";
+import { Fab } from "../Components/common/Fab";
+import logo from "../assets/logo.png";
+import { PATHS, useRouter } from "../Components/route.js";
 
 function App() {
+  const router = useRouter();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
@@ -12,6 +15,8 @@ function App() {
   useEffect(() => {
     document.body.classList.add("app");
   }, []);
+
+  const navigateToTrip = () => router.push(PATHS.TRIP);
 
   useEffect(() => {
     fetch(
@@ -72,10 +77,10 @@ function App() {
               </>
             )}
           </div>
-          <button className="fab bottom-right" onClick={() => console.log(0)}>
-            <span class="material-symbols-outlined">airplane_ticket</span>
-            <span className="fab-text">Plan Trip</span>
-          </button>
+
+          <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
+            Plan Trip
+          </Fab>
         </main>
       </>
     );
