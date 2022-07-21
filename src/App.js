@@ -53,7 +53,8 @@ function App() {
           </>}
         </div>
       </div>
-      <Box/>
+      <p className="required-things-heading">Things you should carry 🎒</p>
+      {isLoaded && results && <Box weather={results.weather[0].main}/>}
       </main>
       
     </div>
