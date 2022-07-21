@@ -8,6 +8,11 @@ function App() {
   const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
   const [generic, setGeneric] = useState("app");
+
+  useEffect(() => {
+    document.body.classList.add("app");
+  }, []);
+
   useEffect(() => {
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -24,7 +29,7 @@ function App() {
           } else {
             setIsLoaded(true);
             setResults(result);
-            setGeneric("app " + result.weather[0].main);
+            document.body.classList = result.weather[0].main;
           }
         },
         (error) => {
@@ -38,39 +43,41 @@ function App() {
     return <div>Error: {error.message}</div>;
   } else {
     return (
-      <div className={[generic]}>
+      <>
+        <div className="header">
+          <img className="logo" src={logo} alt="MLH Prep Logo"></img>
+          <h1>Weather App</h1>
+        </div>
         <main>
-          <div className="header">
-            <img className="logo" src={logo} alt="MLH Prep Logo"></img>
-            <h1>Weather App</h1>
+          <h2>Enter a city below 👇</h2>
+          <input
+            type="text"
+            value={city}
+            onChange={(event) => {
+              setCity(event.target.value);
+            }}
+          />
+          <div className="Results">
+            {!isLoaded && <h2>Loading...</h2>}
+            {console.log(results)}
+            {isLoaded && results && (
+              <>
+                <h3>{results.weather[0].main}</h3>
+                <p>Feels like {results.main.feels_like}°C</p>
+                <i>
+                  <p>
+                    {results.name}, {results.sys.country}
+                  </p>
+                </i>
+              </>
+            )}
           </div>
-          <div>
-            <h2>Enter a city below 👇</h2>
-            <input
-              type="text"
-              value={city}
-              onChange={(event) => {
-                setCity(event.target.value);
-              }}
-            />
-            <div className="Results">
-              {!isLoaded && <h2>Loading...</h2>}
-              {console.log(results)}
-              {isLoaded && results && (
-                <>
-                  <h3>{results.weather[0].main}</h3>
-                  <p>Feels like {results.main.feels_like}°C</p>
-                  <i>
-                    <p>
-                      {results.name}, {results.sys.country}
-                    </p>
-                  </i>
-                </>
-              )}
-            </div>
-          </div>
+          <button className="fab bottom-right" onClick={() => console.log(0)}>
+            <span class="material-symbols-outlined">airplane_ticket</span>
+            <span className="fab-text">Plan Trip</span>
+          </button>
         </main>
-      </div>
+      </>
     );
   }
 }
