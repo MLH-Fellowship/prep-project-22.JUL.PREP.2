@@ -8,7 +8,6 @@ function App() {
   const [city, setCity] = useState(null);
   const [results, setResults] = useState(null);
   
-
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition((position) => {
       fetch(
@@ -26,12 +25,11 @@ function App() {
       });
 
     },
-    
-     
-    
+             
     )
   },[])
 
+  const [generic, setGeneric]=useState("app");
 
   useEffect(() => {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
@@ -43,6 +41,7 @@ function App() {
           } else {
             setIsLoaded(true);
             setResults(result);
+            setGeneric("app "+result.weather[0].main);
           }
         },
         (error) => {
@@ -55,14 +54,17 @@ function App() {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
-    return <>
+    return <div className={[generic]}>
+      <main>
       <img className="logo" src={logo} alt="MLH Prep Logo"></img>
       <div>
         <h2>Enter a city below 👇</h2>
         <input
           type="text"
           value={city}
-          onChange={event => setCity(event.target.value)} />
+          onChange={event => {
+            setCity(event.target.value);
+            }} />
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
           {console.log(results)}
@@ -73,7 +75,8 @@ function App() {
           </>}
         </div>
       </div>
-    </>
+      </main>
+    </div>
   }
 }
 
