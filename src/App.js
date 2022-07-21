@@ -7,7 +7,6 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState(null);
   const [results, setResults] = useState(null);
-  
 
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition((position) => {
@@ -25,9 +24,7 @@ function App() {
         setError(err);
       });
 
-    },
-    
-     
+    },     
     
     )
   },[])
