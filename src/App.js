@@ -1,38 +1,32 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./logo.png";
+import Box from "./Components/Box";
 
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [city, setCity] = useState("New York City");
-  const [results, setResults] = useState(null);
   const [generic, setGeneric] = useState("app");
+  const [city, setCity] = useState(null);
+  const [results, setResults] = useState(null);
+
   useEffect(() => {
-    fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
-        city +
-        "&units=metric" +
-        "&appid=" +
-        process.env.REACT_APP_APIKEY
-    )
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          if (result["cod"] !== 200) {
-            setIsLoaded(false);
-          } else {
-            setIsLoaded(true);
-            setResults(result);
-            setGeneric("app " + result.weather[0].main);
-          }
-        },
-        (error) => {
+    window.navigator.geolocation.getCurrentPosition((position) => {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
+      )
+        .then((res) => res.json())
+        .then((result) => {
           setIsLoaded(true);
-          setError(error);
-        }
-      );
-  }, [city]);
+          setCity(`${result.name}, ${result.sys.country}`);
+          setResults(results);
+        })
+        .catch((err) => {
+          setIsLoaded(false);
+          setError(err);
+        });
+    });
+  }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -69,6 +63,8 @@ function App() {
               )}
             </div>
           </div>
+          <p className="required-things-heading">Things you should carry 🎒</p>
+          {isLoaded && results && <Box weather={results.weather[0].main} />}
         </main>
       </div>
     );
