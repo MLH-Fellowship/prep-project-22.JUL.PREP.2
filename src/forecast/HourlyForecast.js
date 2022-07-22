@@ -14,5 +14,4 @@ function HourlyForecast({forecast}) {
         </>
     )
 }
-
 export default HourlyForecast;

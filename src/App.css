@@ -1,15 +1,15 @@
 body {
-    background-color: #133667;
-    padding: 0;
-    color: white;
-    text-align: center;
+  background-color: #133667;
+  padding: 0;
+  color: white;
+  text-align: center;
 }
 
 .logo {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 20%;
+  width: 8%;
   margin-top: 20px;
 }
 
@@ -17,92 +17,92 @@ input {
   padding: 10px;
   border-radius: 4px;
   border: 10px;
-  width: 200px
+  width: 200px;
 }
 
+@media (max-width:2689px) and (min-width:1440px)
+{
+
 .Results {
-  background-color: white;
+  /* background-color: white; */
   margin-left: 150px;
   margin-right: 150px;
   margin-top: 20px;
   border-radius: 8px;
   color: black;
   padding: 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); */
 }
 
-.app{
+.app {
   background-image: url(./assets/backgrounds/clear.jpg);
-  background-size: cover ;
+  background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
   transition: 0.5s ease-out;
   height: 100%;
 }
 
-.Rain{
+.Rain {
   background-image: url(./assets/backgrounds/rainy.jpg);
 }
 
-.Clouds{
+.Clouds {
   background-image: url(./assets/backgrounds/cloudy.jpg);
-} 
+}
 
-
-.Thunder{
+.Thunder {
   background-image: url(./assets/backgrounds/thunder.jpg);
 }
 
-
-.Snow{
+.Snow {
   background-image: url(./assets/backgrounds/snow.jpg);
 }
 
-.Mist{
+.Mist {
   background-image: url(./assets/backgrounds/mist.jpg);
 }
 
-main{
+main {
   min-height: 100vh;
-  background-image: linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.75));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.75)
+  );
 }
-@media (max-width:2689px) and (min-width:1440px)
-{
+}
+/* @media (max-width: 2689px) and (min-width: 1440px) {
   .Results {
     margin-left: 450px;
     margin-right: 450px;
   }
-}
-@media (max-width:1439px) and (min-width:1024px)
-{
+} */
+@media (max-width: 1439px) and (min-width: 1024px) {
   .Results {
     margin-left: 350px;
     margin-right: 350px;
   }
 }
-@media (max-width:1023px) and (min-width:738px)
-{
+@media (max-width: 1023px) and (min-width: 738px) {
   .Results {
     margin-left: 200px;
     margin-right: 200px;
   }
 }
-@media (max-width:737px) and (min-width:425px)
-{
+@media (max-width: 737px) and (min-width: 425px) {
   .Results {
     margin-left: 100px;
     margin-right: 100px;
   }
 }
-@media (max-width:424px) and (min-width:375px)
-{
+@media (max-width: 424px) and (min-width: 375px) {
   .Results {
     margin-left: 90px;
     margin-right: 90px;
   }
 }
-@media (max-width:374px) and (min-width:0px)
-{
+@media (max-width: 374px) and (min-width: 0px) {
   .Results {
     margin-left: 60px;
     margin-right: 60px;
