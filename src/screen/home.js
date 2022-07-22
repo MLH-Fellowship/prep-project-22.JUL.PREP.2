@@ -19,6 +19,24 @@ function App() {
   const navigateToTrip = () => router.push(PATHS.TRIP);
 
   useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition((position) => {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          setIsLoaded(true);
+          setCity(`${result.name}, ${result.sys.country}`);
+          setResults(results);
+        })
+        .catch((err) => {
+          setIsLoaded(false);
+          setError(err);
+        });
+    });
+  }, []);
+
+  useEffect(() => {
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
@@ -77,6 +95,10 @@ function App() {
               </>
             )}
           </div>
+          <p className="required-things-heading">Things you should carry 🎒</p>
+          {isLoaded && results && <Box weather={results.weather[0].main} />}
+          <p className="required-things-heading">Things you should carry 🎒</p>
+          {isLoaded && results && <Box weather={results.weather[0].main} />}
 
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
             Plan Trip
