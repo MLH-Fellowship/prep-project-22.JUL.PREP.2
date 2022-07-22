@@ -15,34 +15,34 @@ function App() {
   const [notfound,setFlag]=useState(false);
   useEffect(() => {
 
-    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
-      .then(res => res.json())
-      .then((result) => {
-        if(result.cod !== '200'){
-          setIsLoaded(true)
-        }
-        else{
-        let hourlyForecast = []
-        result.list.forEach((fc) => {
-          hourlyForecast.push({
-            current_temp: fc.main.temp, 
-            condition: fc.weather[0].description, 
-            date: new Date(fc.dt * 1000),
-            feels_like: fc.main.feels_like,
-            temperature: {
-              minimum: fc.main.temp_min,
-              maximum: fc.main.temp_max, 
-            },
-            icon: fc.weather[0].icon,
-            windspeed: fc.wind.speed,
-            humidity: fc.main.humidity
-          })
-        })
-        setIsLoaded(true);
-        setError();
-        setResults(hourlyForecast)
-        }
-      }, 
+    // fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
+    //   .then(res => res.json())
+    //   .then((result) => {
+    //     if(result.cod !== '200'){
+    //       setIsLoaded(true)
+    //     }
+    //     else{
+    //     let hourlyForecast = []
+    //     result.list.forEach((fc) => {
+    //       hourlyForecast.push({
+    //         current_temp: fc.main.temp, 
+    //         condition: fc.weather[0].description, 
+    //         date: new Date(fc.dt * 1000),
+    //         feels_like: fc.main.feels_like,
+    //         temperature: {
+    //           minimum: fc.main.temp_min,
+    //           maximum: fc.main.temp_max, 
+    //         },
+    //         icon: fc.weather[0].icon,
+    //         windspeed: fc.wind.speed,
+    //         humidity: fc.main.humidity
+    //       })
+    //     })
+    //     setIsLoaded(true);
+    //     setError();
+    //     setResults(hourlyForecast)
+    //   },
+ 
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
@@ -73,7 +73,7 @@ function App() {
         }
 
       )
-  }, [city], [])
+       }, [city]) 
 
   if (error) {
     return <div>Error: {error.message}</div>;
