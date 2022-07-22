@@ -6,6 +6,10 @@ export function Trip() {
   const router = useRouter();
   const navigateToHome = () => router.push(PATHS.HOME);
 
+  React.useEffect(() => {
+    document.title = "Plan a trip";
+  }, []);
+
   return (
     <>
       <Fab onClick={navigateToHome} icon="thermostat">

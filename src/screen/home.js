@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Fab } from "../Components/common/Fab";
+import Box from "../Components/Box";
 import logo from "../assets/logo.png";
 import { PATHS, useRouter } from "../Components/route.js";
 
@@ -10,13 +11,13 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
-  const [generic, setGeneric] = useState("app");
+
+  const navigateToTrip = () => router.push(PATHS.TRIP);
 
   useEffect(() => {
     document.body.classList.add("app");
+    document.title = "Weather";
   }, []);
-
-  const navigateToTrip = () => router.push(PATHS.TRIP);
 
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition((position) => {
@@ -95,8 +96,6 @@ function App() {
               </>
             )}
           </div>
-          <p className="required-things-heading">Things you should carry 🎒</p>
-          {isLoaded && results && <Box weather={results.weather[0].main} />}
           <p className="required-things-heading">Things you should carry 🎒</p>
           {isLoaded && results && <Box weather={results.weather[0].main} />}
 

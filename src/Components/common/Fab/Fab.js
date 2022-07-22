@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./Fab.module.css";
 
 export function Fab({ children, icon, onClick }) {
