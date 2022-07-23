@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import "./home.css";
 import { Fab } from "../Components/common/Fab";
 import Box from "../Components/Box";
 import logo from "../assets/logo.png";
-import { PATHS, useRouter } from "../Components/route.js";
+
+const navigateToTrip = () => (window.location.href = "/trip");
 
 function App() {
-  const router = useRouter();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
-
-  const navigateToTrip = () => router.push(PATHS.TRIP);
 
   useEffect(() => {
     document.body.classList.add("app");
