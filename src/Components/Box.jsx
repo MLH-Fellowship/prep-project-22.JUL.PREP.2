@@ -4,7 +4,7 @@ import requiredThings from "../helper/requiredThings";
 
 function Item(props) {
   return (
-    <div className="flex required-thing">
+    <div key={props.name} className="flex required-thing">
       <img src={props.img} alt={props.alt} width="50" height="50"></img>
       <p>{props.name}</p>
     </div>
