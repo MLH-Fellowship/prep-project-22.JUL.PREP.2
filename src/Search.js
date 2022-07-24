@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import "./search.css";
 
@@ -13,7 +13,7 @@ function autoCompleteCity(city) {
     .then((res) => res.json())
     .then((result) => {
       console.log(result);
-      if(!result.items) return []
+      if (!result.items) return [];
       const set = result.items.map(
         (item) => `${item.address.city}, ${item.address.countryName}`
       );
@@ -66,5 +66,3 @@ export default function SearchBox({ setCity }) {
     </>
   );
 }
-
-
