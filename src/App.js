@@ -4,15 +4,21 @@ import "./App.css";
 import Search from "./Search";
 import Box from "./Components/Box";
 import logo from "./mlh-prep.png";
+import Map from "./Components/Map";
 
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
+  const [coordinates, setCoordinates] = useState({
+    lat: 40.73061,
+    lng: -73.935242,
+  });
   const [results, setResults] = useState(null);
   const [generic, setGeneric] = useState("app");
   const [notfound, setFlag] = useState(false);
 
+  // fetch weather based on the city
   useEffect(() => {
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -41,6 +47,7 @@ function App() {
         }
       );
   }, [city]);
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
@@ -53,10 +60,16 @@ function App() {
 
             <Search setCity={setCity} />
 
+            <Map
+              coordinates={coordinates}
+              setCoordinates={setCoordinates}
+              city={city}
+              setCity={setCity}
+            />
             <div className="Results">
               {!isLoaded && <h2>Loading...</h2>}
               {isLoaded && notfound && <h2>Data not available. </h2>}
-              {console.log(results)}
+              {/* {console.log(results)} */}
               {isLoaded && results && !notfound && (
                 <>
                   <h3>{results.weather[0].main}</h3>
