@@ -85,9 +85,11 @@ function App() {
           `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${process.env.REACT_APP_APIKEY}`
         );
         const data = await response.json();
+        console.log(data);
         setCoordinates({ lat: data[0].lat, lng: data[0].lon });
       } catch (error) {
-        setError(error);
+        console.error(error);
+        alert("Something went wrong while fetching coordinates. ");
       }
     };
 
