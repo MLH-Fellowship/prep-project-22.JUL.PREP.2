@@ -1,0 +1,21 @@
+.hourly-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0.2rem;
+    color: black;
+}
+
+.hour, .day {
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    padding: 0.2rem;
+    color: rgb(53, 53, 53);
+    background-color: rgb(255, 191, 0);
+    border: 0;
+}
+
+.day {
+    margin-bottom: 0.5rem;
+}
