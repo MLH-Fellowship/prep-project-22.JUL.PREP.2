@@ -11,8 +11,8 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
   const [coordinates, setCoordinates] = useState({
-    lat: 40.73061,
-    lng: -73.935242,
+    lat: 40.7127,
+    lng: -74.0061,
   });
   const [results, setResults] = useState(null);
   const [generic, setGeneric] = useState("app");
