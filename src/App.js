@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import React from 'react'
-import './App.css';
+import React from "react";
+import "./App.css";
 import Forecast from "./forecast/Forecast.js";
 import Search from "./Search";
 import Box from "./Components/Box";
@@ -63,33 +63,31 @@ function App() {
       .then((res) => res.json())
       .then(
         (result) => {
-            if (result["cod"] !== '200') {
+          if (result["cod"] !== "200") {
             setIsLoaded(false);
-            if(result["cod"]=="404")
-            {
+            if (result["cod"] == "404") {
               setIsLoaded(true);
               setFlag(true);
             }
-          }
-          else {
+          } else {
             console.log(result);
-            let hourlyForecast = []
+            let hourlyForecast = [];
             result.list.forEach((fc) => {
               hourlyForecast.push({
-                current_temp: fc.main.temp, 
-                condition: fc.weather[0].description, 
+                current_temp: fc.main.temp,
+                condition: fc.weather[0].description,
                 date: new Date(fc.dt * 1000),
                 feels_like: fc.main.feels_like,
                 temperature: {
                   minimum: fc.main.temp_min,
-                  maximum: fc.main.temp_max, 
+                  maximum: fc.main.temp_max,
                 },
                 icon: fc.weather[0].icon,
                 windspeed: fc.wind.speed,
-                humidity: fc.main.humidity
-              })
-            })
-            setForecast(hourlyForecast)
+                humidity: fc.main.humidity,
+              });
+            });
+            setForecast(hourlyForecast);
             setIsLoaded(true);
             setResults(result);
           }
@@ -97,7 +95,7 @@ function App() {
         (error) => {
           setIsLoaded(true);
           setError(error);
-          console.log(error)
+          console.log(error);
         }
       );
 
@@ -108,7 +106,7 @@ function App() {
           `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${process.env.REACT_APP_APIKEY}`
         );
         const data = await response.json();
-        console.log(data);
+
         setCoordinates({ lat: data[0].lat, lng: data[0].lon });
       } catch (error) {
         console.error(error);
@@ -131,17 +129,25 @@ function App() {
 
             <Search setCity={setCity} />
 
+            <div className="Results">
+              {isLoaded && forecast && (
+                <>
+                  <Forecast hourlyForecast={forecast} />
+                </>
+              )}
+            </div>
+
             <section className="results-map-container">
               <div className="Results">
                 {!isLoaded && <h2>Loading...</h2>}
                 {isLoaded && notfound && <h2>Data not available. </h2>}
                 {isLoaded && results && !notfound && (
                   <>
-                    <h3>{results.weather[0].main}</h3>
-                    <p>Feels like {results.main.feels_like}°C</p>
+                    <h3>{results.list[0].weather[0].main}</h3>
+                    <p>Feels like {results.list[0].main.feels_like}°C</p>
                     <i>
                       <p>
-                        {results.name}, {results.sys.country}
+                        {results.list[0].name}, {results.list[0].sys.country}
                       </p>
                     </i>
                   </>
@@ -160,7 +166,9 @@ function App() {
             </section>
           </div>
           <p className="required-things-heading">Things you should carry 🎒</p>
-          {isLoaded && results && <Box weather={results.weather[0].main} />}
+          {isLoaded && results && (
+            <Box weather={results.list[0].weather[0].main} />
+          )}
         </main>
       </div>
     );
