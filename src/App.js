@@ -18,8 +18,9 @@ function App() {
   const [generic, setGeneric] = useState("app");
   const [notfound, setFlag] = useState(false);
 
-  // fetch weather based on the city
+  // fetch data when city changes
   useEffect(() => {
+    // fetch weather based on the city
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
@@ -46,6 +47,21 @@ function App() {
           setError(error);
         }
       );
+
+    // fetch coordinates based on the city
+    const fetchCoordinates = async () => {
+      try {
+        const response = await fetch(
+          `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${process.env.REACT_APP_APIKEY}`
+        );
+        const data = await response.json();
+        setCoordinates({ lat: data[0].lat, lng: data[0].lon });
+      } catch (error) {
+        setError(error);
+      }
+    };
+
+    fetchCoordinates();
   }, [city]);
 
   if (error) {
