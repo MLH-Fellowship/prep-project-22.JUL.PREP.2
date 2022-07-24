@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Forecast.css"
 import HourlyForecast from "./HourlyForecast.js";
 import humidity_logo from "../assets/humidity.png";
@@ -6,6 +6,9 @@ import windspeed_logo from "../assets/windspeed.png";
 
 
 function Forecast({hourlyForecast}) {
+
+    const [isCelsius, setCelsius] = useState(true)
+
     let currentForecast = hourlyForecast[0];
     return (
         <>
@@ -15,7 +18,10 @@ function Forecast({hourlyForecast}) {
                     <div className='weather-icon'>
                         <img src={"http://openweathermap.org/img/wn/"+currentForecast.icon+"@2x.png"} alt='cloudy_img'/>
                     </div>
-                    <p>{Math.round(currentForecast.current_temp)}&#8451;</p>
+                    {isCelsius
+                    ? <p>{Math.round(currentForecast.current_temp)}&#8451;</p>
+                    : <p>{Math.round(currentForecast.current_temp*1.8+32)}&#8457;</p> 
+                    }
                 </div>
                 <div className='weather-lowerrow'>
                     <div id='humidity'>
@@ -34,12 +40,14 @@ function Forecast({hourlyForecast}) {
             </div>
             <div className='hourly-forecast-container'>
                 {hourlyForecast.map((el, index) => (
-                    <HourlyForecast key={index} forecast={el} />
+                    <HourlyForecast key={index} forecast={el} unit={isCelsius}/>
                 ))}
             </div>
+            <button className='temp-toggle' onClick={() => setCelsius(!isCelsius)}>toggle</button>
         </div>
         </>
     )
 }
+
 
 export default Forecast;
