@@ -20,6 +20,9 @@ input {
   width: 200px;
 }
 
+@media (max-width:2689px) and (min-width:1440px)
+{
+
 .Results {
   background-color: white;
   width: 30%;
@@ -27,7 +30,7 @@ input {
   border-radius: 8px;
   color: black;
   padding: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); */
 }
 
 .app {
@@ -76,11 +79,15 @@ main {
   justify-content: space-between;
   gap: 25px;
 }
+
 .map {
   width: 100%;
 }
+
 .leaflet-container {
   height: 600px;
   width: 600px;
   margin: 0 auto;
+=======
+}
 }
