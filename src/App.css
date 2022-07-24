@@ -22,9 +22,8 @@ input {
 
 .Results {
   background-color: white;
-  margin-left: 150px;
-  margin-right: 150px;
-  margin-top: 20px;
+  width: 30%;
+  margin: 20px 0;
   border-radius: 8px;
   color: black;
   padding: 10px;
@@ -68,43 +67,20 @@ main {
     rgba(0, 0, 0, 0.75)
   );
 }
-@media (max-width: 2689px) and (min-width: 1440px) {
-  .Results {
-    margin-left: 450px;
-    margin-right: 450px;
-  }
-}
-@media (max-width: 1439px) and (min-width: 1024px) {
-  .Results {
-    margin-left: 350px;
-    margin-right: 350px;
-  }
-}
-@media (max-width: 1023px) and (min-width: 738px) {
-  .Results {
-    margin-left: 200px;
-    margin-right: 200px;
-  }
-}
-@media (max-width: 737px) and (min-width: 425px) {
-  .Results {
-    margin-left: 100px;
-    margin-right: 100px;
-  }
-}
-@media (max-width: 424px) and (min-width: 375px) {
-  .Results {
-    margin-left: 90px;
-    margin-right: 90px;
-  }
-}
-@media (max-width: 374px) and (min-width: 0px) {
-  .Results {
-    margin-left: 60px;
-    margin-right: 60px;
-  }
-}
 
+.results-map-container {
+  padding-top: 2rem;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+}
+.map {
+  width: 100%;
+}
 .leaflet-container {
-  height: 400px;
+  height: 600px;
+  width: 600px;
+  margin: 0 auto;
 }

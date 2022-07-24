@@ -60,28 +60,32 @@ function App() {
 
             <Search setCity={setCity} />
 
-            <Map
-              coordinates={coordinates}
-              setCoordinates={setCoordinates}
-              city={city}
-              setCity={setCity}
-            />
-            <div className="Results">
-              {!isLoaded && <h2>Loading...</h2>}
-              {isLoaded && notfound && <h2>Data not available. </h2>}
-              {/* {console.log(results)} */}
-              {isLoaded && results && !notfound && (
-                <>
-                  <h3>{results.weather[0].main}</h3>
-                  <p>Feels like {results.main.feels_like}°C</p>
-                  <i>
-                    <p>
-                      {results.name}, {results.sys.country}
-                    </p>
-                  </i>
-                </>
-              )}
-            </div>
+            <section className="results-map-container">
+              <div className="Results">
+                {!isLoaded && <h2>Loading...</h2>}
+                {isLoaded && notfound && <h2>Data not available. </h2>}
+                {/* {console.log(results)} */}
+                {isLoaded && results && !notfound && (
+                  <>
+                    <h3>{results.weather[0].main}</h3>
+                    <p>Feels like {results.main.feels_like}°C</p>
+                    <i>
+                      <p>
+                        {results.name}, {results.sys.country}
+                      </p>
+                    </i>
+                  </>
+                )}
+              </div>{" "}
+              <div className="map">
+                <Map
+                  coordinates={coordinates}
+                  setCoordinates={setCoordinates}
+                  city={city}
+                  setCity={setCity}
+                />
+              </div>
+            </section>
           </div>
           <p className="required-things-heading">Things you should carry 🎒</p>
           {isLoaded && results && <Box weather={results.weather[0].main} />}
