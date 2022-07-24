@@ -10,13 +10,43 @@ function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
-  const [coordinates, setCoordinates] = useState({
-    lat: 40.7127,
-    lng: -74.0061,
-  });
+  const [coordinates, setCoordinates] = useState(null);
   const [results, setResults] = useState(null);
   const [generic, setGeneric] = useState("app");
   const [notfound, setFlag] = useState(false);
+
+  // get geolocation of the user
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCoordinates({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+
+          // fetch city name based on coordinates
+          fetch(
+            `http://api.openweathermap.org/geo/1.0/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              setCity(data[0].name);
+            })
+            .catch((error) => {
+              console.error(
+                `Couldn't fetch city based on user's location: ${error}`
+              );
+            });
+        },
+        (error) => {
+          console.error(
+            `Something went wrong while getting user's location: ${error}`
+          );
+        }
+      );
+    } else alert("Geolocation is not available");
+  }, []);
 
   // fetch data when city changes
   useEffect(() => {
@@ -80,7 +110,6 @@ function App() {
               <div className="Results">
                 {!isLoaded && <h2>Loading...</h2>}
                 {isLoaded && notfound && <h2>Data not available. </h2>}
-                {/* {console.log(results)} */}
                 {isLoaded && results && !notfound && (
                   <>
                     <h3>{results.weather[0].main}</h3>
@@ -94,12 +123,14 @@ function App() {
                 )}
               </div>{" "}
               <div className="map">
-                <Map
-                  coordinates={coordinates}
-                  setCoordinates={setCoordinates}
-                  city={city}
-                  setCity={setCity}
-                />
+                {coordinates && (
+                  <Map
+                    coordinates={coordinates}
+                    setCoordinates={setCoordinates}
+                    city={city}
+                    setCity={setCity}
+                  />
+                )}
               </div>
             </section>
           </div>
