@@ -3,6 +3,13 @@ body {
   padding: 0;
   color: white;
   text-align: center;
+  height: 100vh;
+  background-image: url(../assets/backgrounds/clear.jpg);
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  /* transition: 0.5s ease-out; */
 }
 
 .logo {
@@ -20,9 +27,6 @@ input {
   width: 200px;
 }
 
-@media (max-width:2689px) and (min-width:1440px)
-{
-
 .Results {
   /* background-color: white; */
   margin-left: 150px;
@@ -34,44 +38,35 @@ input {
   /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); */
 }
 
-.app {
-  background-image: url(./assets/backgrounds/clear.jpg);
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  transition: 0.5s ease-out;
-  height: 100%;
-}
-
 .Rain {
-  background-image: url(./assets/backgrounds/rainy.jpg);
+  background-image: url(../assets/backgrounds/rainy.jpg);
 }
 
 .Clouds {
-  background-image: url(./assets/backgrounds/cloudy.jpg);
+  background-image: url(../assets/backgrounds/cloudy.jpg);
 }
 
 .Thunder {
-  background-image: url(./assets/backgrounds/thunder.jpg);
+  background-image: url(../assets/backgrounds/thunder.jpg);
 }
 
 .Snow {
-  background-image: url(./assets/backgrounds/snow.jpg);
+  background-image: url(../assets/backgrounds/snow.jpg);
 }
 
 .Mist {
-  background-image: url(./assets/backgrounds/mist.jpg);
+  background-image: url(../assets/backgrounds/mist.jpg);
 }
 
-main {
+/* main {
   min-height: 100vh;
   background-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.2),
     rgba(0, 0, 0, 0.75)
   );
-}
-}
+} */
+
 /* @media (max-width: 2689px) and (min-width: 1440px) {
   .Results {
     margin-left: 450px;
