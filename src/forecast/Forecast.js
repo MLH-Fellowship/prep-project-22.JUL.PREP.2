@@ -13,6 +13,7 @@ function Forecast({hourlyForecast}) {
     return (
         <>
         <div className='weather-container'>
+        <button className='temp-toggle' onClick={() => setCelsius(!isCelsius)}>Toggle for Unit Change</button>
             <div className='weather-card'>
                 <div className='weather-upperrow'>
                     <div className='weather-icon'>
@@ -43,7 +44,7 @@ function Forecast({hourlyForecast}) {
                     <HourlyForecast key={index} forecast={el} unit={isCelsius}/>
                 ))}
             </div>
-            <button className='temp-toggle' onClick={() => setCelsius(!isCelsius)}>toggle</button>
+            
         </div>
         </>
     )

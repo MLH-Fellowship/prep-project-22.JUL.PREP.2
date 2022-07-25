@@ -1,9 +1,10 @@
 .weather-container {
-    background-color: rgb(162, 211, 234);
+    background-color: rgb(117, 200, 238);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     border-radius: 8px;
     max-width: 700px;
     margin: 0 auto;
+    position: relative;
 }
 
 .weather-card {
@@ -16,7 +17,28 @@
     color: black;
 
 }
-
+.temp-toggle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    outline: none;
+    border: none;
+    color: white;
+    height: 40px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.35) 0px 0px 20px 0px;
+    background-color: rgb(11, 136, 194);
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    transition: all 150ms ease-in-out;
+}
+.temp-toggle:hover{
+    cursor: pointer;
+}
 .weather-lowerrow {
     display: flex;
     justify-content: space-between;
