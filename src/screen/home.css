@@ -26,15 +26,18 @@ input {
   width: 200px;
 }
 
+@media (max-width:2689px) and (min-width:1440px)
+{
+
 .Results {
-  background-color: white;
+  /* background-color: white; */
   margin-left: 150px;
   margin-right: 150px;
   margin-top: 20px;
   border-radius: 8px;
   color: black;
   padding: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); */
 }
 
 .Rain {
@@ -57,12 +60,21 @@ input {
   background-image: url(../assets/backgrounds/mist.jpg);
 }
 
-@media (max-width: 2689px) and (min-width: 1440px) {
+main {
+  min-height: 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.75)
+  );
+}
+
+/* @media (max-width: 2689px) and (min-width: 1440px) {
   .Results {
     margin-left: 450px;
     margin-right: 450px;
   }
-}
+} */
 @media (max-width: 1439px) and (min-width: 1024px) {
   .Results {
     margin-left: 350px;
