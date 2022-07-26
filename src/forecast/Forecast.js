@@ -13,7 +13,8 @@ function Forecast({hourlyForecast}) {
     return (
         <>
         <div className='weather-container'>
-        <button className='temp-toggle' onClick={() => setCelsius(!isCelsius)}>Toggle for Unit Change</button>
+        <button className='temp-toggle' onClick={() => setCelsius(!isCelsius)}>{isCelsius ? 
+                <div>&#8457;</div> : <div>&#8451;</div>}</button>
             <div className='weather-card'>
                 <div className='weather-upperrow'>
                     <div className='weather-icon'>
@@ -33,9 +34,12 @@ function Forecast({hourlyForecast}) {
                         <img src={windspeed_logo} alt='windspeed_icon'/>
                         <p>{currentForecast.windspeed}kmph</p>
                     </div>
-                    <div id='precipitation'>
+                    <div id='real-feel'>
                         <p className='realfeel'>R.F</p>
-                        <p>{Math.round(currentForecast.feels_like)}&#8451;</p>
+                        {isCelsius
+                        ? <p>{Math.round(currentForecast.feels_like)}&#8451;</p>
+                        : <p>{Math.round(currentForecast.feels_like*1.8+32)}&#8457;</p> 
+                        }
                     </div>
                 </div>
             </div>
