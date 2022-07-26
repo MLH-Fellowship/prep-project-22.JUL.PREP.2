@@ -1,0 +1,28 @@
+.fab {
+  outline: none;
+  border: none;
+  color: white;
+  height: 48px;
+  padding: 10px 20px;
+  border-radius: 48px;
+  box-shadow: rgba(50, 50, 93, 0.35) 0px 0px 20px 0px;
+  background-color: var(--primary-color);
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}
+
+.fab:hover {
+  background-color: var(--primary-color-light);
+}
+
+.fabText {
+  font-weight: bold;
+  margin-left: 4px;
+}
