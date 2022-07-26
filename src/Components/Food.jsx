@@ -1,4 +1,5 @@
 import React from "react";
+import '../assets/css/food.css';
 
 const fetchFood = (country) =>
   fetch(
@@ -16,5 +17,9 @@ export const Food = ({ country }) => {
     fetchFood(country).then((food) => setFood(food));
   }, []);
 
-  return <>Popular in this area{food}</>;
+  return <>
+  <div className="food">
+    Food items popular in this area: <br/> <b> {food} </b>
+  </div>
+  </>;
 };
