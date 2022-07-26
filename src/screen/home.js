@@ -5,6 +5,7 @@ import Box from "../Components/Box";
 import logo from "../assets/logo.png";
 import Forecast from "../forecast/Forecast.js";
 import Search from "../Search";
+import Attractions from "../Components/Attractions";
 
 const navigateToTrip = () => (window.location.href = "/trip");
 
@@ -122,6 +123,9 @@ function App() {
           <p className="required-things-heading">Things you should carry 🎒</p>
           {isLoaded && results && (
             <Box weather={results.list[0].weather[0].main} />
+          )}
+          {isLoaded && results && (
+            <Attractions results={results} />
           )}
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
             Plan Trip
