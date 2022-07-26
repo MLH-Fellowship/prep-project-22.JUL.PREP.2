@@ -7,9 +7,17 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState(null);
   const [results, setResults] = useState(null);
-
+  const [touristPlace, setTouristPlace] = useState(null);
+  const [lat,setLat] = useState(null);
+  const [lng,setLong] = useState(null);
+  
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition((position) => {
+      
+      setLat(position.coords.latitude);
+   
+      setLong(position.coords.longitude);
+
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
       )
@@ -27,9 +35,8 @@ function App() {
     }
 
     );
-  },[])
-
-
+  },[]);
+  
   const [generic, setGeneric]=useState("app");
 
   useEffect(() => {
@@ -79,6 +86,6 @@ function App() {
       </main>
     </div>
   }
-}
+  }
 
 export default App;
