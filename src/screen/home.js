@@ -80,6 +80,7 @@ function App() {
     );
   }, [city]);
 
+  console.log(results);
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
@@ -116,7 +117,7 @@ function App() {
           {isLoaded && results && (
             <Box weather={results.list[0].weather[0].main} />
           )}
-          <Food location={results.list[0].weather[0]} />
+          {/* <Food location={results.list[0].weather[0]} /> */}
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
             Plan Trip
           </Fab>
