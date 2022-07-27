@@ -11,7 +11,7 @@ export function Trip() {
 
   return (
     <>
-      <Food country="India" />
+      <Food country="PK" />
       <Fab onClick={navigateToHome} icon="thermostat">
         Weather
       </Fab>

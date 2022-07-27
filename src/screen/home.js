@@ -117,7 +117,6 @@ function App() {
           {isLoaded && results && (
             <Box weather={results.list[0].weather[0].main} />
           )}
-          {/* <Food location={results.list[0].weather[0]} /> */}
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
             Plan Trip
           </Fab>
