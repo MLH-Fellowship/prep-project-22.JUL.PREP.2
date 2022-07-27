@@ -16,6 +16,7 @@ function App() {
   const [forecast, setForecast] = useState(null);
   const [generic, setGeneric] = useState("app");
   const [notfound, setFlag] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
 
   console.log(1, results);
   const fetchWeather = (url) => {
@@ -75,6 +76,10 @@ function App() {
       fetchWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`)
       
     });
+    console.log();
+    if(localStorage.getItem('bookmarkedLocations')===null){
+      localStorage.setItem('bookmarkedLocations',JSON.parse([]));
+    }
   }, []);
 
   useEffect(() => {
@@ -85,7 +90,30 @@ function App() {
         "&appid=" +
         process.env.REACT_APP_APIKEY
     );
+    const bookmarkedLocations = JSON.parse(localStorage.getItem('bookmarkedLocations'));
+    if(bookmarkedLocations.includes(city)) setBookmarked(true);
+    else setBookmarked(false);
   }, [city]);
+
+  useEffect(()=>{
+    console.log(bookmarked+">>>>>>>>>>>>>>>>>>");
+  },[bookmarked]);
+
+  const bookmarkLocation = (location)=>{
+     let bookmarkedLocations = JSON.parse(localStorage.getItem('bookmarkedLocations'));
+     if(bookmarkedLocations.includes(location)){
+        bookmarkedLocations = bookmarkedLocations.filter(boomark=>{
+          return boomark!==location;
+        });
+        setBookmarked(false);
+     }
+     else{
+       bookmarkedLocations.push(location);
+       setBookmarked(true);
+     }
+     localStorage.setItem('bookmarkedLocations',JSON.stringify(bookmarkedLocations));
+     
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -100,7 +128,9 @@ function App() {
           <h2>Enter a city below 👇</h2>
           <div className="flex search-container">
             <Search setCity={setCity} />
-            <div className="bookmark-button">Bookmark Location</div>
+            {isLoaded && !notfound?<div className="bookmark-button" onClick={()=>{
+              bookmarkLocation(city);
+            }}>{bookmarked?"Remove Bookmark":"Bookmark Location"}</div>:null}
           </div>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
