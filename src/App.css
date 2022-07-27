@@ -20,24 +20,20 @@ input {
   width: 200px;
 }
 
-.leaflet-container {
-  height: 600px;
-  width: 400px;
-  margin: 0 auto;
-}
-
-.forecast-map-section {
+.map-container {
   width: 80%;
   margin: 0 auto;
-  gap: 2rem;
-  display: flex;
-  align-items: center;
+  margin-top: 20px;
+  min-width: 400px;
 }
 
-@media (max-width: 768px) {
-  .forecast-map-section {
-    width: 90%;
-    flex-direction: column;
+.leaflet-container {
+  height: 600px;
+}
+
+@media (min-width: 600px) {
+  .map-container {
+    width: 50%;
   }
 }
 

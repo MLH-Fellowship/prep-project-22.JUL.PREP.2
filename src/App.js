@@ -47,7 +47,13 @@ function App() {
           );
         }
       );
-    } else alert("Geolocation is not available");
+    } else {
+      setCoordinates({
+        lat: 40.7313432,
+        lng: -74.2170748,
+      });
+      alert("Geolocation is not available");
+    }
   }, []);
 
   // fetch data when city changes
@@ -130,24 +136,24 @@ function App() {
 
             <Search setCity={setCity} />
 
-            <section className="forecast-map-section">
-              {/* Forecast */}
-              {isLoaded && forecast && (
-                <>
-                  <Forecast hourlyForecast={forecast} />
-                </>
-              )}
+            {city && <h1>{city}</h1>}
 
-              {/* Map */}
-              {coordinates && (
-                <Map
-                  coordinates={coordinates}
-                  setCoordinates={setCoordinates}
-                  city={city}
-                  setCity={setCity}
-                />
-              )}
-            </section>
+            {/* Forecast */}
+            {isLoaded && forecast && (
+              <>
+                <Forecast hourlyForecast={forecast} city={city} />
+              </>
+            )}
+
+            {/* Map */}
+            {coordinates && (
+              <Map
+                coordinates={coordinates}
+                setCoordinates={setCoordinates}
+                city={city}
+                setCity={setCity}
+              />
+            )}
           </div>
 
           {/* Things you should carry */}

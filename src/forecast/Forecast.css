@@ -1,8 +1,10 @@
 .weather-container {
-  background-color: rgb(162, 211, 234);
-  border: 2px solid #000;
+  background-color: rgb(117, 200, 238);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 8px;
+  max-width: 700px;
   margin: 0 auto;
+  position: relative;
 }
 
 .weather-card {
