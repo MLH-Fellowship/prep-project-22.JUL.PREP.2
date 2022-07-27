@@ -70,7 +70,6 @@ function App() {
               setFlag(true);
             }
           } else {
-            console.log(result);
             let hourlyForecast = [];
             result.list.forEach((fc) => {
               hourlyForecast.push({
@@ -102,12 +101,14 @@ function App() {
     // fetch coordinates based on the city
     const fetchCoordinates = async () => {
       try {
-        const response = await fetch(
-          `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${process.env.REACT_APP_APIKEY}`
-        );
-        const data = await response.json();
+        if (city) {
+          const response = await fetch(
+            `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${process.env.REACT_APP_APIKEY}`
+          );
+          const data = await response.json();
 
-        setCoordinates({ lat: data[0].lat, lng: data[0].lon });
+          setCoordinates({ lat: data[0].lat, lng: data[0].lon });
+        }
       } catch (error) {
         console.error(error);
         alert("Something went wrong while fetching coordinates. ");
