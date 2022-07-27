@@ -8,7 +8,7 @@ const autocompleteURL =
 function autoCompleteCity(city) {
   if (!city) return Promise.resolve([]);
 
-  const query = `q=${city}&limit=4&types=city&apiKey=${process.env.REACT_APP_HEREAPI}`;
+  const query = `q=${city}&limit=4&types=city&apiKey=71jcwfm2L5Kd0JjqWZl4XXyaSjdDVuaZPEu_rXRYVOA`;
   return fetch(`${autocompleteURL}${query}`)
     .then((res) => res.json())
     .then((result) => {
