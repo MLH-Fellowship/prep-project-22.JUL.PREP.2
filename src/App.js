@@ -130,42 +130,27 @@ function App() {
 
             <Search setCity={setCity} />
 
-            <div className="Results">
+            <section className="forecast-map-section">
+              {/* Forecast */}
               {isLoaded && forecast && (
                 <>
                   <Forecast hourlyForecast={forecast} />
                 </>
               )}
-            </div>
 
-            <section className="results-map-container">
-              <div className="Results">
-                {!isLoaded && <h2>Loading...</h2>}
-                {isLoaded && notfound && <h2>Data not available. </h2>}
-                {isLoaded && results && !notfound && (
-                  <>
-                    <h3>{results.list[0].weather[0].main}</h3>
-                    <p>Feels like {results.list[0].main.feels_like}°C</p>
-                    <i>
-                      <p>
-                        {results.list[0].name}, {results.list[0].sys.country}
-                      </p>
-                    </i>
-                  </>
-                )}
-              </div>{" "}
-              <div className="map">
-                {coordinates && (
-                  <Map
-                    coordinates={coordinates}
-                    setCoordinates={setCoordinates}
-                    city={city}
-                    setCity={setCity}
-                  />
-                )}
-              </div>
+              {/* Map */}
+              {coordinates && (
+                <Map
+                  coordinates={coordinates}
+                  setCoordinates={setCoordinates}
+                  city={city}
+                  setCity={setCity}
+                />
+              )}
             </section>
           </div>
+
+          {/* Things you should carry */}
           <p className="required-things-heading">Things you should carry 🎒</p>
           {isLoaded && results && (
             <Box weather={results.list[0].weather[0].main} />
