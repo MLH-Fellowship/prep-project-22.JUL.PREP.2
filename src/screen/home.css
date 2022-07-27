@@ -12,6 +12,16 @@ body {
   /* transition: 0.5s ease-out; */
 }
 
+.bookmark-button{
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background: white;
+    color: black;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 .logo {
   display: block;
   margin-left: auto;
@@ -48,6 +58,10 @@ input {
 
 .Thunder {
   background-image: url(../assets/backgrounds/thunder.jpg);
+}
+
+.search-container{
+  justify-content: center;
 }
 
 .Snow {

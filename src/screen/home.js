@@ -98,7 +98,10 @@ function App() {
         </div>
         <main>
           <h2>Enter a city below 👇</h2>
-          <Search setCity={setCity} />
+          <div className="flex search-container">
+            <Search setCity={setCity} />
+            <div className="bookmark-button">Bookmark Location</div>
+          </div>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
 
