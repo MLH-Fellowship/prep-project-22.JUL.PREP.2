@@ -136,8 +136,6 @@ function App() {
 
             <Search setCity={setCity} />
 
-            {city && <h1>{city}</h1>}
-
             {/* Forecast */}
             {isLoaded && forecast && (
               <>
