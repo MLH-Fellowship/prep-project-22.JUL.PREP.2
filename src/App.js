@@ -110,8 +110,8 @@ function App() {
           setCoordinates({ lat: data[0].lat, lng: data[0].lon });
         }
       } catch (error) {
+        console.log("Something went wrong while fetching coordinates.");
         console.error(error);
-        alert("Something went wrong while fetching coordinates. ");
       }
     };
 
