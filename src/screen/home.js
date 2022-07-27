@@ -22,9 +22,17 @@ function App() {
     return fetch(url)
       .then((res) => res.json())
       .then((result) => {
+        
         if (result.cod !== "200") {
+
           setIsLoaded(false);
           console.log("hah");
+          if(result.name !== null){
+            setIsLoaded(true);
+            console.log("name",result.name);
+            setCity(`${result.name}, ${result.sys.country}`);
+            setResults(results);
+          }
           if (result["cod"] == "404") {
             setIsLoaded(true);
             setFlag(true);
@@ -64,9 +72,8 @@ function App() {
     document.body.classList.add("app");
     document.title = "Weather";
     window.navigator.geolocation.getCurrentPosition((position) => {
-      fetchWeather(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
-      );
+      fetchWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`)
+      
     });
   }, []);
 

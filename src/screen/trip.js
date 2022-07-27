@@ -8,6 +8,8 @@ export function Trip() {
     document.title = "Plan a trip";
   }, []);
 
+  
+
   return (
     <>
       <Fab onClick={navigateToHome} icon="thermostat">
