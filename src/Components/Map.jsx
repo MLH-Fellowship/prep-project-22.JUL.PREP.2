@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import DynamicMarker from "./DynamicMarker";
+import "../assets/css/Box.css";
 
 export default function Map({ coordinates, setCoordinates, city, setCity }) {
   return (
