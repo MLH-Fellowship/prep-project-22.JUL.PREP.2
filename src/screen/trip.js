@@ -1,15 +1,14 @@
 import React, {useState} from "react";
 import { Fab } from "../Components/common/Fab";
-import TextField  from "@mui/material/TextField";
-import MyLocationIcon from '@mui/icons-material/MyLocation';
-import PlaceIcon from '@mui/icons-material/Place';
 import './trip.css';
+import Search from "../Search";
 
 
 const navigateToHome = () => (window.location.href = "/");
 
 export function Trip() {
-  const [currentCity, setCurrentCity] = useState([]);
+  const [currentCity, setCity] = useState("New York City");
+  const [currentCityData, setCurrentCityData] = useState([])
   React.useEffect(() => {
     document.title = "Plan a trip";
 
@@ -24,36 +23,16 @@ export function Trip() {
           lon: result.coord.lon, 
           name: result.name 
         })
-        setCurrentCity(currentCoords);
+        setCurrentCityData(currentCoords);
       })
     })
   }, []);
-  console.log(currentCity)
+  console.log(currentCityData)
   return ( 
     <>
     <div className="search-bar">
-      <div className="search">
-      <div className="current">
-      <MyLocationIcon className="icon"/>
-      <TextField 
-        className="current-location"
-        id="outlined-basic"
-        variant="outlined"
-        label="Current-location"
-        size="Normal"
-      />
-      </div>
-      <div className="destination">
-      <PlaceIcon className="icon"/>
-      <TextField
-        className="destination-location" 
-        id="outlined-basic"
-        variant="outlined"
-        label="Destination-location" 
-        size="Normal"
-      />
-      </div>
-      </div>
+      <Search setCity={setCity} />
+      <Search setCity={setCity} />
     </div>
       <Fab onClick={navigateToHome} icon="thermostat">
         Weather
