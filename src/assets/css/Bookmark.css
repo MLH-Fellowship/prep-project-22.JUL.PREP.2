@@ -19,21 +19,21 @@
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
-ul{
+.bookmark-box ul{
 	margin: auto 220px;
 	padding: 0;
 	overflow: hidden;
 }
 
-li{
+.bookmark-box li{
 	float: right;
 }
 
-li:nth-child(1) {
+.bookmark-box li:nth-child(1) {
 	float: left;
 }
 
-li:nth-child(2) {
+.bookmark-box li:nth-child(2) {
 	float: left;
 	margin-left: 30px;
 }
