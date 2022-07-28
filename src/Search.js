@@ -12,6 +12,7 @@ function autoCompleteCity(city) {
   return fetch(`${autocompleteURL}${query}`)
     .then((res) => res.json())
     .then((result) => {
+      console.log(result);
       if (!result.items) return [];
       const set = result.items.map(
         (item) => `${item.address.city}, ${item.address.countryName}`
@@ -35,6 +36,7 @@ export default function SearchBox({ setCity }) {
 
   const _handleOnSearch = async (searchText) => {
     const items = await autoCompleteCity(searchText);
+    console.log(items);
     setItems(items);
     setSearchText(searchText);
   };
