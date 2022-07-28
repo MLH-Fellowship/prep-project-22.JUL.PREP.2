@@ -31,8 +31,8 @@ function Bookmark({x, weather, city, dailyforecast}) {
 			</div>
 			<div className="bookmark-wind-humidity">
 				<ul>
-					<li> Wind {dailyforecast[0].wind} kmph </li>
-					<li> Humidity {dailyforecast[0].humidity} </li>
+					<li> Wind {dailyforecast[0].windspeed}m/s </li>
+					<li> Humidity {dailyforecast[0].humidity}% </li>
 				</ul>
 			</div>
 			<div className="bookmark-temp">
