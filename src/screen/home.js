@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./home.css";
 import { Fab } from "../Components/common/Fab";
 import Box from "../Components/Box";
+import BookmarksBox from "../Components/Bookmark";
 import logo from "../assets/logo.png";
 import Forecast from "../forecast/Forecast.js";
 import Search from "../Search";
@@ -156,6 +157,13 @@ function App() {
           {isLoaded && results && (
             <Box weather={results.list[0].weather[0].main} />
           )}
+
+					{isLoaded && forecast && (
+              <>
+								<BookmarksBox weather={forecast} />
+              </>
+          )}
+
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
             Plan Trip
           </Fab>

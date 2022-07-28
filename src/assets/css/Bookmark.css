@@ -1,0 +1,53 @@
+
+.flex {
+	display: flex;
+}
+
+.bookmark-box {
+	flex-flow: row wrap;
+	justify-content: space-evenly;
+  border-radius: 10px;
+  transition: all 0.5s ;
+}
+
+.bookmark {
+	min-width: 450px;
+	min-height: 480px;
+	margin: 30px 20px;
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+ul{
+	margin: auto 220px;
+	padding: 0;
+	overflow: hidden;
+}
+
+li{
+	float: right;
+}
+
+li:nth-child(1) {
+	float: left;
+	list-style-type: none;
+}
+
+.bookmark-daily-forecast {
+	flex-flow: row wrap;
+}
+
+.daily-container {
+	margin: 10px 20px;
+}
+
+.daily-container p {
+	margin: 0px;
+}
+
+@media (max-width: 738px){
+	ul{
+		margin: auto 100px;
+	}
+}
+
