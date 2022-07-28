@@ -1,0 +1,14 @@
+.food {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    transition: all 0.5s ;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    min-width: 144px;
+    align-items: center;
+    padding: 20px 40px;
+    margin-left: 10%;
+    margin-top: 4%;
+    margin-right: 10%;
+    font-size: 20px;
+}
