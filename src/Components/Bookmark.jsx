@@ -36,7 +36,7 @@ function Bookmark({x, weather, city, dailyforecast}) {
 				</ul>
 			</div>
 			<div className="bookmark-temp">
-				<h1>20 &#8451;</h1>
+				<h1>{ Math.round(dailyforecast[0].current_temp) }&#8451;</h1>
 			</div>
 			<div className="bookmark-weathericon">
 				<img alt="" src=""></img>
