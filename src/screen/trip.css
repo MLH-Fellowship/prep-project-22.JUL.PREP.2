@@ -1,9 +1,15 @@
 .search-bar{
-    margin-top: 30px;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
 }
 
 .leaflet-container {
-    width: 50%;
-    height: 65vh;
+    width: 80%;
+    height: 75vh;
     margin: 0 auto;
   }
