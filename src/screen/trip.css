@@ -22,3 +22,8 @@
     margin: 15px;
 }
 
+.leaflet-container {
+    width: 50%;
+    height: 65vh;
+    margin: 0 auto;
+  }

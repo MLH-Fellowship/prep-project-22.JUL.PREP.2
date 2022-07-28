@@ -4,12 +4,15 @@ import TextField  from "@mui/material/TextField";
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PlaceIcon from '@mui/icons-material/Place';
 import './trip.css';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 
 const navigateToHome = () => (window.location.href = "/");
 
 export function Trip() {
-  const [currentCity, setCurrentCity] = useState([]);
+  const [currentCity, setCurrentCity] = useState(null);
+
+
   React.useEffect(() => {
     document.title = "Plan a trip";
 
@@ -18,13 +21,13 @@ export function Trip() {
       .then(res => res.json())
       .then(result => {
         console.log(result)
-        let currentCoords = []; 
-        currentCoords.push({
+        // let currentCoords = []; 
+        // currentCoords.push()
+        setCurrentCity({
           lat: result.coord.lat, 
           lon: result.coord.lon, 
           name: result.name 
-        })
-        setCurrentCity(currentCoords);
+        });
       })
     })
   }, []);
@@ -54,6 +57,26 @@ export function Trip() {
       />
       </div>
       </div>
+      {currentCity==null? <div>Loading...</div> :
+        <MapContainer center={[currentCity.lat,currentCity.lon]} zoom={13} scrollWheelZoom={false}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[currentCity.lat,currentCity.lon]}>
+            <Popup>You are here!</Popup>
+          </Marker>
+        </MapContainer>
+          }
+      {/* <MapContainer center={[50, 50]} zoom={13} scrollWheelZoom={false}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[50, 50]}>
+          <Popup>You are here!</Popup>
+        </Marker>
+      </MapContainer> */}
     </div>
       <Fab onClick={navigateToHome} icon="thermostat">
         Weather
