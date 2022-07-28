@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import "./search.css";
 
