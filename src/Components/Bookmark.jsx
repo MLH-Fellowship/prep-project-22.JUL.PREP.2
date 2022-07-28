@@ -125,6 +125,7 @@ function BookmarksContainer({bookmarks}){
 
 	  return(
 		<div className="flex bookmark-box">
+			{weatherData.length===0?<h2>No Bookmarks 😒</h2>:null}
 			{isLoaded && weatherData && weatherData.map(data=>{
 				const daily_forecast = [];
 				console.log(data);
