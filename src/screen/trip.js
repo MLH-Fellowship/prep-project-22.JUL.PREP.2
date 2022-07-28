@@ -1,5 +1,6 @@
 import React from "react";
 import { Fab } from "../Components/common/Fab";
+import { Food } from "../Components/Food";
 
 const navigateToHome = () => (window.location.href = "/");
 
@@ -12,6 +13,7 @@ export function Trip() {
 
   return (
     <>
+      <Food country="PK" />
       <Fab onClick={navigateToHome} icon="thermostat">
         Weather
       </Fab>
