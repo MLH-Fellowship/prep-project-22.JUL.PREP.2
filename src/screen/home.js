@@ -158,7 +158,7 @@ function App() {
               </>
             )}
           </div>
-          <p className="required-things-heading">Things you should carry 🎒</p>
+          {isLoaded && results && <p className="required-things-heading">Things you should carry 🎒</p>}
           {isLoaded && results && (
             <Box weather={results.list[0].weather[0].main} />
           )}
