@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./home.css";
 import { Fab } from "../Components/common/Fab";
 import Box from "../Components/Box";
@@ -18,8 +18,9 @@ function App() {
   const [generic, setGeneric] = useState("app");
   const [notfound, setFlag] = useState(false);
 
-  console.log(1, results);
-  const fetchWeather = (url) => {
+  console.log("results", results);
+  
+  const fetchWeather = useCallback((url) => {
     return fetch(url)
       .then((res) => res.json())
       .then((result) => {
@@ -67,7 +68,7 @@ function App() {
         setIsLoaded(true);
         setError(error);
       });
-  };
+  },[]);
 
   useEffect(() => {
     document.body.classList.add("app");
