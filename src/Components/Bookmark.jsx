@@ -38,9 +38,6 @@ function Bookmark({x, weather, city, dailyforecast}) {
 			<div className="bookmark-temp">
 				<h1>{ Math.round(dailyforecast[0].current_temp) }&#8451;</h1>
 			</div>
-			<div className="bookmark-weathericon">
-				<img alt="" src=""></img>
-			</div>
 			<div className="flex bookmark-daily-forecast">
 		    {dailyforecast.map((forecast, index) => (
 				  <DailyForecast key={index} day={days[forecast.date.getDay()]} forecast={forecast} />
