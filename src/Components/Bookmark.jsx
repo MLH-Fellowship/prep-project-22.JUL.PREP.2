@@ -2,11 +2,11 @@ import React,{useEffect, useState} from "react";
 import "../assets/css/Bookmark.css";
 
 
-function DailyForecast({days, forecast}) {
+function DailyForecast({day, forecast}) {
   return (
       <>
       <div className='daily-container'>
-          <div className='day'>{}</div>
+          <div className='day'>{day}</div>
           <img src={"http://openweathermap.org/img/wn/"+forecast.icon+"@2x.png"} alt="cloudy-icon"/>
 				<p>{Math.round(forecast.temperature.maximum)}&#8451;</p>
 				<p>{Math.round(forecast.temperature.minimum)}&#8451;</p>
