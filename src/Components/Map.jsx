@@ -16,7 +16,7 @@ export default function Map({ coordinates, setCoordinates, city, setCity }) {
 
   return (
     <>
-      <section className="map-container">
+      <div className="map-container">
         <MapContainer
           className="leaflet-container"
           center={[coordinates.lat, coordinates.lng]}
@@ -34,7 +34,7 @@ export default function Map({ coordinates, setCoordinates, city, setCity }) {
             setCity={setCity}
           />
         </MapContainer>
-      </section>
+      </div>
     </>
   );
 }

@@ -161,17 +161,16 @@ function App() {
                 <Forecast hourlyForecast={forecast} />
               </>
             )}
-
-            {/* Map */}
-            {coordinates && (
-              <Map
-                coordinates={coordinates}
-                setCoordinates={setCoordinates}
-                city={city}
-                setCity={setCity}
-              />
-            )}
           </div>
+          {/* Map */}
+          {coordinates && (
+            <Map
+              coordinates={coordinates}
+              setCoordinates={setCoordinates}
+              city={city}
+              setCity={setCity}
+            />
+          )}
 
           <p className="required-things-heading">Things you should carry 🎒</p>
           {isLoaded && results && (
