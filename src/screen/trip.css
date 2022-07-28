@@ -1,25 +1,5 @@
-/* .search-bar{
-    display: flex;
-    flex-direction: row;
-    margin: 40px;
-} */
-.search{
-    margin-top: 40px;
-    display: inline-flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-}
-
-.current-location, .destination-location{
-    margin-bottom: 10px !important;
-    width: 600px;
-    font-size: 45px;
-    color: blueviolet !important;
-}
-
-.icon{
-    width: 35px !important;
-    margin: 15px;
+.search-bar{
+    margin-top: 30px;
 }
 
 .leaflet-container {
