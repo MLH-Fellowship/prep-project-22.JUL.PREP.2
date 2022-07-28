@@ -115,6 +115,7 @@ function App() {
      
   }
 
+  console.log(results);
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
