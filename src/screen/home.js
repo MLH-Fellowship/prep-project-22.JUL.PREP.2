@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./home.css";
 import { Fab } from "../Components/common/Fab";
 import Box from "../Components/Box";
-import BookmarksBox from "../Components/Bookmark";
+import BookmarksContainer from "../Components/Bookmark";
 import logo from "../assets/logo.png";
 import Forecast from "../forecast/Forecast.js";
 import Search from "../Search";
@@ -18,6 +18,7 @@ function App() {
   const [generic, setGeneric] = useState("app");
   const [notfound, setFlag] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarks, setBookmarks] = useState([]);
 
   console.log(1, results);
   const fetchWeather = (url) => {
@@ -74,12 +75,15 @@ function App() {
     document.body.classList.add("app");
     document.title = "Weather";
     window.navigator.geolocation.getCurrentPosition((position) => {
-      fetchWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`)
-      
+      fetchWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`)  
     });
     console.log();
     if(localStorage.getItem('bookmarkedLocations')===null){
-      localStorage.setItem('bookmarkedLocations',JSON.parse([]));
+      localStorage.setItem('bookmarkedLocations',JSON.stringify([]));
+      setBookmarks([]);
+    }
+    else{
+      setBookmarks(JSON.parse(localStorage.getItem('bookmarkedLocations')));
     }
   }, []);
 
@@ -113,7 +117,7 @@ function App() {
        setBookmarked(true);
      }
      localStorage.setItem('bookmarkedLocations',JSON.stringify(bookmarkedLocations));
-     
+     setBookmarks(bookmarkedLocations);
   }
 
   console.log(results);
@@ -159,11 +163,8 @@ function App() {
             <Box weather={results.list[0].weather[0].main} />
           )}
 
-					{isLoaded && forecast && (
-              <>
-								<BookmarksBox weather={forecast} />
-              </>
-          )}
+          <h1>Bookmark Locations 🔖</h1>
+					<BookmarksContainer bookmarks={bookmarks}/>
 
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
             Plan Trip

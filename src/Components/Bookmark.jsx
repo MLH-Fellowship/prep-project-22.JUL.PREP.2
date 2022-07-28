@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import "../assets/css/Bookmark.css";
 
 
@@ -6,7 +6,7 @@ function DailyForecast({days, forecast}) {
   return (
       <>
       <div className='daily-container'>
-          <div className='day'>{days[forecast.date.getDay()]}</div>
+          <div className='day'>{}</div>
           <img src={"http://openweathermap.org/img/wn/"+forecast.icon+"@2x.png"} alt="cloudy-icon"/>
 				<p>{Math.round(forecast.temperature.maximum)}&#8451;</p>
 				<p>{Math.round(forecast.temperature.minimum)}&#8451;</p>
@@ -15,20 +15,24 @@ function DailyForecast({days, forecast}) {
   )
 }
 
-function Bookmark({x, days, weather, dailyforecast}) {
+function Bookmark({x, weather, city, dailyforecast}) {
+	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	return (
 		<>
 		<div className="bookmark">
 			<div className="bookmark-country-name">
-				<h1>Moscow</h1>
+				<h1>{city}</h1>
 			</div>
 			<div className="bookmark-cloud-type">
-				<p>Cloudy</p>
+				<div className='weather-icon'>
+                    <img src={"http://openweathermap.org/img/wn/"+dailyforecast[0].icon+"@2x.png"} alt='cloudy_img'/>
+                </div>
+				<p>{dailyforecast[0].condition}</p>
 			</div>
 			<div className="bookmark-wind-humidity">
 				<ul>
-					<li> Wind 0.00 m/s </li>
-					<li> Humidity 92% </li>
+					<li> Wind {dailyforecast[0].wind} kmph </li>
+					<li> Humidity {dailyforecast[0].humidity} </li>
 				</ul>
 			</div>
 			<div className="bookmark-temp">
@@ -38,8 +42,8 @@ function Bookmark({x, days, weather, dailyforecast}) {
 				<img alt="" src=""></img>
 			</div>
 			<div className="flex bookmark-daily-forecast">
-		    {dailyforecast.map((el, index) => (
-				  <DailyForecast key={index} days={days} forecast={el} />
+		    {dailyforecast.map((forecast, index) => (
+				  <DailyForecast key={index} day={days[forecast.date.getDay()]} forecast={forecast} />
         ))}
 			</div>
 		</div>
@@ -48,40 +52,106 @@ function Bookmark({x, days, weather, dailyforecast}) {
 }
 
 
-function BookmarksBox({weather}) {
-	const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	let daily_forecast = []
 
-	// Populate the first data for each day
-	weather.map((data, key) => {
-		if (key === 0) {
-			daily_forecast.push(data);
-		}
-		const last = daily_forecast.length - 1;
 
-		if (!(data.date.getDay() == daily_forecast[last].date.getDay())) {
-			daily_forecast.push(data);
-		}
-	});
 
-	console.log(daily_forecast);
+function BookmarksContainer({bookmarks}){
+	const [error, setError] = useState(null);
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [results, setResults] = useState(null);
+	const [forecast, setForecast] = useState(null);
+	const [generic, setGeneric] = useState("app");
+	const [notfound, setFlag] = useState(false);
+	const [weatherData, setWeatherData] = useState([]);
 
-	let arr = [1, 2, 3, 4, 5];
-	return (
-		<div className="flex bookmark-box">
-			{
-				arr.map((number, key) => (
-					<Bookmark
-						x={key}
-						days={weekdays}
-					  weather={number}
-						dailyforecast={daily_forecast.slice(0, 5)}
-					/>
-				))
+	const fetchWeather = (city) => {
+		const url = "https://api.openweathermap.org/data/2.5/forecast?q=" +
+        city +
+        "&units=metric" +
+        "&appid=" +
+        process.env.REACT_APP_APIKEY;
+		return fetch(url)
+		  .then((res) => res.json())
+		  .then((result) => {
+			
+			if (result.cod !== "200") {
+	
+			  setIsLoaded(false);
+			  console.log("hah");
+			  if(result.name !== null){
+				setIsLoaded(true);
+				console.log("name",result.name);
+				setResults(results);
+			  }
+			  if (result["cod"] == "404") {
+				setIsLoaded(true);
+				setFlag(true);
+			  }
+			  return null;
 			}
+			console.log("yo");
+	
+			let hourlyForecast = [];
+			result.list.forEach((fc) => {
+			  hourlyForecast.push({
+				current_temp: fc.main.temp,
+				condition: fc.weather[0].description,
+				date: new Date(fc.dt * 1000),
+				feels_like: fc.main.feels_like,
+				temperature: {
+				  minimum: fc.main.temp_min,
+				  maximum: fc.main.temp_max,
+				},
+				icon: fc.weather[0].icon,
+				windspeed: fc.wind.speed,
+				humidity: fc.main.humidity,
+			  });
+			});
+			document.body.classList = result.list[0].weather[0].main;
+			setWeatherData(prev=>{
+				return [...prev, {forecast:hourlyForecast,city:city}]
+			});
+			setIsLoaded(true);
+		  })
+		  .catch((error) => {
+			setIsLoaded(true);
+			setError(error);
+		  });
+	  };
+
+	  useEffect(()=>{
+		console.log(bookmarks+">>>>>>>>>>>>>>>>>>>>>>>>>.");
+		setWeatherData([]);
+		setIsLoaded(false);
+		bookmarks.forEach(async city=>{
+			await fetchWeather(city);
+		 })
+	  },[bookmarks]);
+
+	  return(
+		<div className="flex bookmark-box">
+			{isLoaded && weatherData && weatherData.map(data=>{
+				const daily_forecast = [];
+				console.log(data);
+				data?.forecast?.map((data, key) => {
+					if (key === 0) {
+						daily_forecast.push(data);
+					}
+					const last = daily_forecast.length - 1;
+			
+					if (!(data.date.getDay() == daily_forecast[last].date.getDay())) {
+						daily_forecast.push(data);
+					}
+				});
+				return <Bookmark city={data.city} dailyforecast={daily_forecast.slice(0, 5)}/>
+			})}
 		</div>
-	);
+	  )
+
+	  
+	
 }
 
-export default BookmarksBox;
+
+export default BookmarksContainer;
 
