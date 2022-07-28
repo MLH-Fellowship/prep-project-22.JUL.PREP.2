@@ -25,21 +25,18 @@ function Bookmark({x, weather, city, dailyforecast}) {
 			</div>
 			<div className="bookmark-cloud-type">
 				<div className='weather-icon'>
-                    <img src={"http://openweathermap.org/img/wn/"+dailyforecast[0].icon+"@2x.png"} alt='cloudy_img'/>
-                </div>
+					<img src={"http://openweathermap.org/img/wn/"+dailyforecast[0].icon+"@2x.png"} alt='cloudy_img'/>
+        </div>
 				<p>{dailyforecast[0].condition}</p>
 			</div>
 			<div className="bookmark-wind-humidity">
 				<ul>
-					<li> Wind {dailyforecast[0].wind} kmph </li>
-					<li> Humidity {dailyforecast[0].humidity} </li>
+					<li> Wind {dailyforecast[0].windspeed}m/s </li>
+					<li> Humidity {dailyforecast[0].humidity}% </li>
 				</ul>
 			</div>
 			<div className="bookmark-temp">
-				<h1>20 &#8451;</h1>
-			</div>
-			<div className="bookmark-weathericon">
-				<img alt="" src=""></img>
+				<h1>{ Math.round(dailyforecast[0].current_temp) }&#8451;</h1>
 			</div>
 			<div className="flex bookmark-daily-forecast">
 		    {dailyforecast.map((forecast, index) => (
@@ -77,7 +74,6 @@ function BookmarksContainer({bookmarks}){
 			if (result.cod !== "200") {
 	
 			  setIsLoaded(false);
-			  console.log("hah");
 			  if(result.name !== null){
 				setIsLoaded(true);
 				console.log("name",result.name);
@@ -89,7 +85,6 @@ function BookmarksContainer({bookmarks}){
 			  }
 			  return null;
 			}
-			console.log("yo");
 	
 			let hourlyForecast = [];
 			result.list.forEach((fc) => {
@@ -147,9 +142,6 @@ function BookmarksContainer({bookmarks}){
 			})}
 		</div>
 	  )
-
-	  
-	
 }
 
 
