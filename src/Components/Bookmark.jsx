@@ -25,8 +25,8 @@ function Bookmark({x, weather, city, dailyforecast}) {
 			</div>
 			<div className="bookmark-cloud-type">
 				<div className='weather-icon'>
-                    <img src={"http://openweathermap.org/img/wn/"+dailyforecast[0].icon+"@2x.png"} alt='cloudy_img'/>
-                </div>
+					<img src={"http://openweathermap.org/img/wn/"+dailyforecast[0].icon+"@2x.png"} alt='cloudy_img'/>
+        </div>
 				<p>{dailyforecast[0].condition}</p>
 			</div>
 			<div className="bookmark-wind-humidity">
@@ -77,7 +77,6 @@ function BookmarksContainer({bookmarks}){
 			if (result.cod !== "200") {
 	
 			  setIsLoaded(false);
-			  console.log("hah");
 			  if(result.name !== null){
 				setIsLoaded(true);
 				console.log("name",result.name);
@@ -89,7 +88,6 @@ function BookmarksContainer({bookmarks}){
 			  }
 			  return null;
 			}
-			console.log("yo");
 	
 			let hourlyForecast = [];
 			result.list.forEach((fc) => {
@@ -147,9 +145,6 @@ function BookmarksContainer({bookmarks}){
 			})}
 		</div>
 	  )
-
-	  
-	
 }
 
 
