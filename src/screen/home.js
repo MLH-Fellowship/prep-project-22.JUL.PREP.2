@@ -187,7 +187,7 @@ function App() {
             <Search setCity={setCity} />
             {isLoaded && !notfound?<div className="bookmark-button" onClick={()=>{
               bookmarkLocation(city);
-            }}>{bookmarked?"Remove Bookmark":"Bookmark Location"}</div>:null}
+            }}>{bookmarked?"Remove Bookmark":"Add Bookmark"}</div>:null}
           </div>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
@@ -213,7 +213,7 @@ function App() {
             <Box weather={results.list[0].weather[0].main} />
           )}
 
-          <h1>Bookmark Locations 🔖</h1>
+          <h1>Bookmarked Locations 🔖</h1>
 					<BookmarksContainer bookmarks={bookmarks}/>
 
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
