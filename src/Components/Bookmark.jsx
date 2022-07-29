@@ -129,14 +129,14 @@ function BookmarksContainer({bookmarks}){
 			{isLoaded && weatherData && weatherData.map(data=>{
 				const daily_forecast = [];
 				console.log(data);
-				data?.forecast?.map((data, key) => {
+				data?.forecast?.map((daily, key) => {
 					if (key === 0) {
-						daily_forecast.push(data);
+						daily_forecast.push(daily);
 					}
 					const last = daily_forecast.length - 1;
 			
-					if (!(data.date.getDay() == daily_forecast[last].date.getDay())) {
-						daily_forecast.push(data);
+					if (!(daily.date.getDay() == daily_forecast[last].date.getDay())) {
+						daily_forecast.push(daily);
 					}
 				});
 				return <Bookmark city={data.city} dailyforecast={daily_forecast.slice(1, 6)}/>
