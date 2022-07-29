@@ -49,3 +49,11 @@
 	}
 }
 
+.leaflet-container{
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	height: 400px;
+    width: 100%;
+	border: 2px dotted #133667;
+}
