@@ -39,8 +39,8 @@ function Bookmark({city, dailyforecast}) {
 				<h1>{ Math.round(dailyforecast[0].current_temp) }&#8451;</h1>
 			</div>
 			<div className="flex bookmark-daily-forecast">
-		    {dailyforecast.map((forecast, index) => (
-				  <DailyForecast key={index} day={days[forecast.date.getDay()]} forecast={forecast} />
+		    {dailyforecast.map((forecast, id) => (
+				  <DailyForecast key={id} day={days[forecast.date.getDay()]} forecast={forecast} />
         ))}
 			</div>
 		</div>
