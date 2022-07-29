@@ -5,6 +5,7 @@ import Box from "../Components/Box";
 import logo from "../assets/logo.png";
 import Forecast from "../forecast/Forecast.js";
 import Search from "../Search";
+import Map from "../Components/Map";
 
 const navigateToTrip = () => (window.location.href = "/trip");
 
@@ -12,24 +13,59 @@ function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
+  const [coordinates, setCoordinates] = useState(null);
   const [results, setResults] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [generic, setGeneric] = useState("app");
   const [notfound, setFlag] = useState(false);
 
-  console.log(1, results);
+  // get geolocation of the user
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCoordinates({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+
+          // fetch city name based on coordinates
+          fetch(
+            `http://api.openweathermap.org/geo/1.0/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              setCity(data[0].name);
+            })
+            .catch((error) => {
+              console.error(
+                `Couldn't fetch city based on user's location: ${error}`
+              );
+            });
+        },
+        (error) => {
+          console.error(
+            `Something went wrong while getting user's location: ${error}`
+          );
+        }
+      );
+    } else {
+      setCoordinates({
+        lat: 40.7313432,
+        lng: -74.2170748,
+      });
+      alert("Geolocation is not available");
+    }
+  }, []);
+
   const fetchWeather = (url) => {
     return fetch(url)
       .then((res) => res.json())
       .then((result) => {
-        
         if (result.cod !== "200") {
-
           setIsLoaded(false);
-          console.log("hah");
-          if(result.name !== null){
+          if (result.name !== null) {
             setIsLoaded(true);
-            console.log("name",result.name);
             setCity(`${result.name}, ${result.sys.country}`);
             setResults(results);
           }
@@ -39,7 +75,6 @@ function App() {
           }
           return null;
         }
-        console.log("yo");
 
         let hourlyForecast = [];
         result.list.forEach((fc) => {
@@ -72,8 +107,9 @@ function App() {
     document.body.classList.add("app");
     document.title = "Weather";
     window.navigator.geolocation.getCurrentPosition((position) => {
-      fetchWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`)
-      
+      fetchWeather(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
+      );
     });
   }, []);
 
@@ -85,9 +121,27 @@ function App() {
         "&appid=" +
         process.env.REACT_APP_APIKEY
     );
+
+    // fetch coordinates based on the city
+    const fetchCoordinates = async () => {
+      try {
+        if (city) {
+          const response = await fetch(
+            `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${process.env.REACT_APP_APIKEY}`
+          );
+          const data = await response.json();
+
+          setCoordinates({ lat: data[0].lat, lng: data[0].lon });
+        }
+      } catch (error) {
+        console.log("Something went wrong while fetching coordinates.");
+        console.error(error);
+      }
+    };
+
+    fetchCoordinates();
   }, [city]);
 
-  console.log(results);
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
@@ -102,24 +156,22 @@ function App() {
           <Search setCity={setCity} />
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
-
-            {/* {isLoaded && results && (
-              <>
-                <h3>{results.weather[0].main}</h3>
-                <p>Feels like {results.main.feels_like}°C</p>
-                <i>
-                  <p>
-                    {results.name}, {results.sys.country}
-                  </p>
-                </i>
-              </>
-            )} */}
             {isLoaded && forecast && (
               <>
                 <Forecast hourlyForecast={forecast} />
               </>
             )}
           </div>
+          {/* Map */}
+          {coordinates && (
+            <Map
+              coordinates={coordinates}
+              setCoordinates={setCoordinates}
+              city={city}
+              setCity={setCity}
+            />
+          )}
+
           <p className="required-things-heading">Things you should carry 🎒</p>
           {isLoaded && results && (
             <Box weather={results.list[0].weather[0].main} />
