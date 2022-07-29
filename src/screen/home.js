@@ -108,7 +108,7 @@ function App() {
         setIsLoaded(true);
         setError(error);
       });
-  },[]);
+  }
 
   useEffect(() => {
     document.body.classList.add("app");
