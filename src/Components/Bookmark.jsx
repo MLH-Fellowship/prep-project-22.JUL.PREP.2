@@ -15,7 +15,7 @@ function DailyForecast({day, forecast}) {
   )
 }
 
-function Bookmark({x, weather, city, dailyforecast}) {
+function Bookmark({city, dailyforecast}) {
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	return (
 		<>
@@ -39,8 +39,8 @@ function Bookmark({x, weather, city, dailyforecast}) {
 				<h1>{ Math.round(dailyforecast[0].current_temp) }&#8451;</h1>
 			</div>
 			<div className="flex bookmark-daily-forecast">
-		    {dailyforecast.map((forecast, index) => (
-				  <DailyForecast key={index} day={days[forecast.date.getDay()]} forecast={forecast} />
+		    {dailyforecast.map((forecast, id) => (
+				  <DailyForecast key={id} day={days[forecast.date.getDay()]} forecast={forecast} />
         ))}
 			</div>
 		</div>
@@ -101,7 +101,6 @@ function BookmarksContainer({bookmarks}){
 	  };
 
 	  useEffect(()=>{
-		console.log(bookmarks+">>>>>>>>>>>>>>>>>>>>>>>>>.");
 		setWeatherData([]);
 		setIsLoaded(false);
 		bookmarks.forEach(async city=>{
@@ -112,20 +111,19 @@ function BookmarksContainer({bookmarks}){
 	  return(
 		error?<div className="flex bookmark-box">
 			{weatherData.length===0?<h2>No Bookmarks 😒</h2>:null}
-			{isLoaded && weatherData && weatherData.map(data=>{
+			{isLoaded && weatherData && weatherData.map((data, index)=>{
 				const daily_forecast = [];
-				console.log(data);
-				data?.forecast?.map((data, key) => {
+				data?.forecast?.map((daily, key) => {
 					if (key === 0) {
-						daily_forecast.push(data);
+						daily_forecast.push(daily);
 					}
 					const last = daily_forecast.length - 1;
 			
-					if (!(data.date.getDay() == daily_forecast[last].date.getDay())) {
-						daily_forecast.push(data);
+					if (!(daily.date.getDay() === daily_forecast[last].date.getDay())) {
+						daily_forecast.push(daily);
 					}
 				});
-				return <Bookmark city={data.city} dailyforecast={daily_forecast.slice(0, 5)}/>
+				return <Bookmark key={index} city={data.city} dailyforecast={daily_forecast.slice(1, 6)}/>
 			})}
 		</div>:<h3>Error while loading the data</h3>
 	  )
