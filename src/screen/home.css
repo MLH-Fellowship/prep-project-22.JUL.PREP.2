@@ -54,16 +54,16 @@ input {
     color: rgb(255, 255, 255);
     border-radius: 10px;
     transition: all 0.5s ;
-    min-width: 144px;
+    width: 1000px;
     align-items: center;
     padding: 10px 10px;
-    margin-left: 10%;
+    margin-left: auto;
     margin-top: 4%;
-    margin-right: 10%;
+    margin-right: auto;
     font-size: 15px;
   font-weight: bold;
   text-align: center;
-
+  position: inherit;
 }
 
 .Rain {
