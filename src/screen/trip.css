@@ -25,3 +25,8 @@
     border: none;
     cursor: pointer;
 }
+
+.icon{
+    margin-top: 10px;
+    width: 50px;
+}

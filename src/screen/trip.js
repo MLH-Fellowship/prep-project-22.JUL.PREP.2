@@ -1,9 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { Fab } from "../Components/common/Fab";
+import { Food }from "../Components/Food";
 import './trip.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import Search from "../Search";
 import RoutingMachine from "./routing";
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+
 
 const navigateToHome = () => (window.location.href = "/");
 
@@ -22,7 +25,7 @@ export function Trip() {
     fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${fromCity}&apiKey=${process.env.REACT_APP_HEREAPI}`)
     .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         let list = [...cityList];
         list.push({
           lat: result.items[0].position.lat,
@@ -33,7 +36,7 @@ export function Trip() {
     fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${toCity}&apiKey=${process.env.REACT_APP_HEREAPI}`)
       .then((res) => res.json())
         .then((result) => {
-          console.log(result);
+          //console.log(result);
           let list = [...cityList];
           list.push({
             lat: result.items[0].position.lat,
@@ -53,7 +56,7 @@ export function Trip() {
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`)
       .then(res => res.json())
       .then(result => {
-        console.log(result)
+        //console.log(result)
         setCurrentCity({
           lat: result.coord.lat, 
           lon: result.coord.lon, 
@@ -63,11 +66,11 @@ export function Trip() {
     })
 
   }, []);
-  console.log(currentCity)
   return ( 
     <>
     <div className="search-bar">
       <Search setCity={setFromCity} />
+      <ArrowRightAltIcon className="icon"/>
       <Search setCity={setToCity} />
     </div>
     <button onClick={setRoute} className="route_button">Find Route</button>
@@ -83,6 +86,7 @@ export function Trip() {
           </Marker>
         </MapContainer>
           }
+      <Food country="PK" />
       <Fab onClick={navigateToHome} icon="thermostat">
         Weather
       </Fab>
