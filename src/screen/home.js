@@ -197,7 +197,6 @@ function App() {
               </>
             )}
           </div>
-          {isLoaded && results && <p className="required-things-heading">Things you should carry 🎒</p>}
           {/* Map */}
           {coordinates && (
             <Map

@@ -53,7 +53,7 @@ function Bookmark({city, dailyforecast}) {
 
 
 function BookmarksContainer({bookmarks}){
-	const [error, setError] = useState(null);
+	const [error, setError] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [weatherData, setWeatherData] = useState([]);
 
@@ -109,7 +109,7 @@ function BookmarksContainer({bookmarks}){
 	  },[bookmarks]);
 
 	  return(
-		error?<div className="flex bookmark-box">
+		!error?<div className="flex bookmark-box">
 			{weatherData.length===0?<h2>No Bookmarks 😒</h2>:null}
 			{isLoaded && weatherData && weatherData.map((data, index)=>{
 				const daily_forecast = [];
