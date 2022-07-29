@@ -126,7 +126,7 @@ function BookmarksContainer({bookmarks}){
 	  return(
 		<div className="flex bookmark-box">
 			{weatherData.length===0?<h2>No Bookmarks 😒</h2>:null}
-			{isLoaded && weatherData && weatherData.map(data=>{
+			{isLoaded && weatherData && weatherData.map((data, index)=>{
 				const daily_forecast = [];
 				console.log(data);
 				data?.forecast?.map((daily, key) => {
@@ -139,7 +139,7 @@ function BookmarksContainer({bookmarks}){
 						daily_forecast.push(daily);
 					}
 				});
-				return <Bookmark city={data.city} dailyforecast={daily_forecast.slice(1, 6)}/>
+				return <Bookmark key={index} city={data.city} dailyforecast={daily_forecast.slice(1, 6)}/>
 			})}
 		</div>
 	  )
