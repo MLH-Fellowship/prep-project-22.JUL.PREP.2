@@ -15,7 +15,7 @@ function DailyForecast({day, forecast}) {
   )
 }
 
-function Bookmark({x, weather, city, dailyforecast}) {
+function Bookmark({city, dailyforecast}) {
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	return (
 		<>
