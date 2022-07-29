@@ -1,11 +1,16 @@
 .search-box {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  z-index: 1000;
-}
+    position: relative;
+    display: inline-block;
+    width: 70%;
+    margin-bottom: 30px;
+  }
 
-.box-header {
-  padding-left: 10%;
-  padding-right: 10%;
-}
+  .search-box ul{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .box-header {
+    padding-left: 10%;
+    padding-right: 10%;
+  }

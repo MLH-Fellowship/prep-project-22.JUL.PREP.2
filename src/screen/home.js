@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./home.css";
 import { Fab } from "../Components/common/Fab";
 import Box from "../Components/Box";
+import BookmarksContainer from "../Components/Bookmark";
 import logo from "../assets/logo.png";
 import Forecast from "../forecast/Forecast.js";
 import Search from "../Search";
@@ -18,6 +19,8 @@ function App() {
   const [forecast, setForecast] = useState(null);
   const [generic, setGeneric] = useState("app");
   const [notfound, setFlag] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarks, setBookmarks] = useState([]);
 
   // get geolocation of the user
   useEffect(() => {
@@ -111,6 +114,13 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
       );
     });
+    if(localStorage.getItem('bookmarkedLocations')===null){
+      localStorage.setItem('bookmarkedLocations',JSON.stringify([]));
+      setBookmarks([]);
+    }
+    else{
+      setBookmarks(JSON.parse(localStorage.getItem('bookmarkedLocations')));
+    }
   }, []);
 
   useEffect(() => {
@@ -121,6 +131,28 @@ function App() {
         "&appid=" +
         process.env.REACT_APP_APIKEY
     );
+    const bookmarkedLocations = JSON.parse(localStorage.getItem('bookmarkedLocations'));
+    if(bookmarkedLocations.includes(city)) setBookmarked(true);
+    else setBookmarked(false);
+    fetchCoordinates();
+  }, [city]);
+
+  const bookmarkLocation = (location)=>{
+     let bookmarkedLocations = JSON.parse(localStorage.getItem('bookmarkedLocations'));
+     if(bookmarkedLocations.includes(location)){
+        bookmarkedLocations = bookmarkedLocations.filter(boomark=>{
+          return boomark!==location;
+        });
+        setBookmarked(false);
+     }
+     else{
+       bookmarkedLocations.push(location);
+       setBookmarked(true);
+     }
+     localStorage.setItem('bookmarkedLocations',JSON.stringify(bookmarkedLocations));
+     setBookmarks(bookmarkedLocations);
+  }
+
 
     // fetch coordinates based on the city
     const fetchCoordinates = async () => {
@@ -139,8 +171,6 @@ function App() {
       }
     };
 
-    fetchCoordinates();
-  }, [city]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -153,7 +183,12 @@ function App() {
         </div>
         <main>
           <h2>Enter a city below 👇</h2>
-          <Search setCity={setCity} />
+          <div className="flex search-container">
+            <Search setCity={setCity} />
+            {isLoaded && !notfound && !bookmarked?<div className="bookmark-button" onClick={()=>{
+              bookmarkLocation(city);
+            }}>Add Bookmark</div>:null}
+          </div>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
             {isLoaded && forecast && (
@@ -176,6 +211,10 @@ function App() {
           {isLoaded && results && (
             <Box weather={results.list[0].weather[0].main} />
           )}
+
+          <h1>Bookmarked Locations 🔖</h1>
+					<BookmarksContainer bookmarks={bookmarks} bookmarkLocation={bookmarkLocation}/>
+
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
             Plan Trip
           </Fab>
