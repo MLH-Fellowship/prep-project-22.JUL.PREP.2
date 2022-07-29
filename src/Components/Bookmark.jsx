@@ -76,10 +76,9 @@ function BookmarksContainer({bookmarks}){
 			  setIsLoaded(false);
 			  if(result.name !== null){
 				setIsLoaded(true);
-				console.log("name",result.name);
 				setResults(results);
 			  }
-			  if (result["cod"] == "404") {
+			  if (result["cod"] === "404") {
 				setIsLoaded(true);
 				setFlag(true);
 			  }
@@ -115,7 +114,6 @@ function BookmarksContainer({bookmarks}){
 	  };
 
 	  useEffect(()=>{
-		console.log(bookmarks+">>>>>>>>>>>>>>>>>>>>>>>>>.");
 		setWeatherData([]);
 		setIsLoaded(false);
 		bookmarks.forEach(async city=>{
@@ -128,14 +126,13 @@ function BookmarksContainer({bookmarks}){
 			{weatherData.length===0?<h2>No Bookmarks 😒</h2>:null}
 			{isLoaded && weatherData && weatherData.map((data, index)=>{
 				const daily_forecast = [];
-				console.log(data);
 				data?.forecast?.map((daily, key) => {
 					if (key === 0) {
 						daily_forecast.push(daily);
 					}
 					const last = daily_forecast.length - 1;
 			
-					if (!(daily.date.getDay() == daily_forecast[last].date.getDay())) {
+					if (!(daily.date.getDay() === daily_forecast[last].date.getDay())) {
 						daily_forecast.push(daily);
 					}
 				});
