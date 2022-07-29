@@ -1,0 +1,32 @@
+.search-bar{
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.leaflet-container {
+    width: 80%;
+    height: 75vh;
+    margin: 0 auto;
+  }
+
+.route_button{
+    width: 150px;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+    border-radius: 15%;
+    border: none;
+    cursor: pointer;
+}
+
+.icon{
+    margin-top: 10px;
+    width: 50px;
+}
