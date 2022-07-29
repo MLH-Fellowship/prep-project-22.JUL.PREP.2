@@ -70,7 +70,7 @@ export function Trip() {
       <Search setCity={setFromCity} />
       <Search setCity={setToCity} />
     </div>
-    <button onClick={setRoute}>Find Route</button>
+    <button onClick={setRoute} className="route_button">Find Route</button>
       {currentCity==null? <div>Loading...</div> :
         <MapContainer center={[currentCity.lat,currentCity.lon]} zoom={13} scrollWheelZoom={false}>
            <TileLayer
