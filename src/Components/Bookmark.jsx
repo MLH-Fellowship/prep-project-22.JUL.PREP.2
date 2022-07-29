@@ -139,7 +139,7 @@ function BookmarksContainer({bookmarks}){
 						daily_forecast.push(data);
 					}
 				});
-				return <Bookmark city={data.city} dailyforecast={daily_forecast.slice(0, 5)}/>
+				return <Bookmark city={data.city} dailyforecast={daily_forecast.slice(1, 6)}/>
 			})}
 		</div>
 	  )
