@@ -15,11 +15,14 @@ function DailyForecast({day, forecast}) {
   )
 }
 
-function Bookmark({city, dailyforecast}) {
+function Bookmark({city, dailyforecast, bookmarkLocation}) {
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	return (
 		<>
 		<div className="bookmark">
+			<div className="bookmark-button remove-bookmark-button" onClick={()=>{
+              bookmarkLocation(city);
+            }}>Remove Bookmark</div>
 			<div className="bookmark-country-name">
 				<h1>{city}</h1>
 			</div>
@@ -52,7 +55,7 @@ function Bookmark({city, dailyforecast}) {
 
 
 
-function BookmarksContainer({bookmarks}){
+function BookmarksContainer({bookmarks, bookmarkLocation}){
 	const [error, setError] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [weatherData, setWeatherData] = useState([]);
@@ -110,7 +113,7 @@ function BookmarksContainer({bookmarks}){
 
 	  return(
 		!error?<div className="flex bookmark-box">
-			{weatherData.length===0?<h2>No Bookmarks 😒</h2>:null}
+			{bookmarks.length===0?<h2>No Bookmarks 😒</h2>:null}
 			{isLoaded && weatherData && weatherData.map((data, index)=>{
 				const daily_forecast = [];
 				data?.forecast?.map((daily, key) => {
@@ -123,7 +126,7 @@ function BookmarksContainer({bookmarks}){
 						daily_forecast.push(daily);
 					}
 				});
-				return <Bookmark key={index} city={data.city} dailyforecast={daily_forecast.slice(1, 6)}/>
+				return <Bookmark key={index} city={data.city} bookmarkLocation={bookmarkLocation} dailyforecast={daily_forecast.slice(1, 6)}/>
 			})}
 		</div>:<h3>Error while loading the data</h3>
 	  )

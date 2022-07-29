@@ -185,9 +185,9 @@ function App() {
           <h2>Enter a city below 👇</h2>
           <div className="flex search-container">
             <Search setCity={setCity} />
-            {isLoaded && !notfound?<div className="bookmark-button" onClick={()=>{
+            {isLoaded && !notfound && !bookmarked?<div className="bookmark-button" onClick={()=>{
               bookmarkLocation(city);
-            }}>{bookmarked?"Remove Bookmark":"Add Bookmark"}</div>:null}
+            }}>Add Bookmark</div>:null}
           </div>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
@@ -213,7 +213,7 @@ function App() {
           )}
 
           <h1>Bookmarked Locations 🔖</h1>
-					<BookmarksContainer bookmarks={bookmarks}/>
+					<BookmarksContainer bookmarks={bookmarks} bookmarkLocation={bookmarkLocation}/>
 
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
             Plan Trip

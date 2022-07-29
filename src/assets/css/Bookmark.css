@@ -19,6 +19,12 @@
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
+.remove-bookmark-button{
+	width: 20%;
+    margin: 18px;
+	cursor: pointer;
+}
+
 .bookmark-box ul{
 	margin: auto 220px;
 	padding: 0;
