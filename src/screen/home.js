@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./home.css";
 import { Fab } from "../Components/common/Fab";
 import Box from "../Components/Box";
 import logo from "../assets/logo.png";
 import Forecast from "../forecast/Forecast.js";
 import Search from "../Search";
+import Attractions from "../Components/Attractions";
 import Map from "../Components/Map";
+
 
 const navigateToTrip = () => (window.location.href = "/trip");
 
@@ -19,6 +21,10 @@ function App() {
   const [generic, setGeneric] = useState("app");
   const [notfound, setFlag] = useState(false);
 
+
+  console.log("results", results);
+  
+  
   // get geolocation of the user
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -59,6 +65,7 @@ function App() {
   }, []);
 
   const fetchWeather = (url) => {
+
     return fetch(url)
       .then((res) => res.json())
       .then((result) => {
@@ -101,7 +108,7 @@ function App() {
         setIsLoaded(true);
         setError(error);
       });
-  };
+  }
 
   useEffect(() => {
     document.body.classList.add("app");
@@ -175,6 +182,9 @@ function App() {
           <p className="required-things-heading">Things you should carry 🎒</p>
           {isLoaded && results && (
             <Box weather={results.list[0].weather[0].main} />
+          )}
+          {isLoaded && results && (
+            <Attractions results={results} />
           )}
           <Fab icon={"airplane_ticket"} onClick={navigateToTrip}>
             Plan Trip
