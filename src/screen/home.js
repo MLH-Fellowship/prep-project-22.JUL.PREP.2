@@ -6,6 +6,8 @@ import logo from "../assets/logo.png";
 import Forecast from "../forecast/Forecast.js";
 import Search from "../Search";
 import Map from "../Components/Map";
+import City from "../Components/City";
+
 
 const navigateToTrip = () => (window.location.href = "/trip");
 
@@ -154,6 +156,8 @@ function App() {
         <main>
           <h2>Enter a city below 👇</h2>
           <Search setCity={setCity} />
+          {isLoaded &&
+          (<div className="city-name"><h1>{city}</h1></div>)}
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
             {isLoaded && forecast && (
