@@ -114,7 +114,6 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}`
       );
     });
-    console.log();
     if(localStorage.getItem('bookmarkedLocations')===null){
       localStorage.setItem('bookmarkedLocations',JSON.stringify([]));
       setBookmarks([]);
@@ -137,10 +136,6 @@ function App() {
     else setBookmarked(false);
     fetchCoordinates();
   }, [city]);
-
-  useEffect(()=>{
-    console.log(bookmarked+">>>>>>>>>>>>>>>>>>");
-  },[bookmarked]);
 
   const bookmarkLocation = (location)=>{
      let bookmarkedLocations = JSON.parse(localStorage.getItem('bookmarkedLocations'));
