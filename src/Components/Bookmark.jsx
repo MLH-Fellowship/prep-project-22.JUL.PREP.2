@@ -55,10 +55,6 @@ function Bookmark({x, weather, city, dailyforecast}) {
 function BookmarksContainer({bookmarks}){
 	const [error, setError] = useState(null);
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [results, setResults] = useState(null);
-	const [forecast, setForecast] = useState(null);
-	const [generic, setGeneric] = useState("app");
-	const [notfound, setFlag] = useState(false);
 	const [weatherData, setWeatherData] = useState([]);
 
 	const fetchWeather = (city) => {
@@ -72,18 +68,8 @@ function BookmarksContainer({bookmarks}){
 		  .then((result) => {
 			
 			if (result.cod !== "200") {
-	
-			  setIsLoaded(false);
-			  if(result.name !== null){
-				setIsLoaded(true);
-				console.log("name",result.name);
-				setResults(results);
-			  }
-			  if (result["cod"] == "404") {
-				setIsLoaded(true);
-				setFlag(true);
-			  }
-			  return null;
+				console.error(result);
+				setError(true);
 			}
 	
 			let hourlyForecast = [];
@@ -124,7 +110,7 @@ function BookmarksContainer({bookmarks}){
 	  },[bookmarks]);
 
 	  return(
-		<div className="flex bookmark-box">
+		error?<div className="flex bookmark-box">
 			{weatherData.length===0?<h2>No Bookmarks 😒</h2>:null}
 			{isLoaded && weatherData && weatherData.map(data=>{
 				const daily_forecast = [];
@@ -141,7 +127,7 @@ function BookmarksContainer({bookmarks}){
 				});
 				return <Bookmark city={data.city} dailyforecast={daily_forecast.slice(0, 5)}/>
 			})}
-		</div>
+		</div>:<h3>Error while loading the data</h3>
 	  )
 }
 
